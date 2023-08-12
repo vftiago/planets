@@ -3,8 +3,8 @@ import { Rarity } from "../domains/rarities/rarity";
 
 import { Button, Card, CardHeader, CardBody, CardFooter, Text, List, ListItem, Center, Divider } from "@chakra-ui/react";
 
-export const PlanetCard = ({ planet, onScanClick }: { planet: Planet; onScanClick: (uuid: string) => void }) => {
-  const { uuid, identified, rarity, biomes } = planet;
+export const PlanetCard = ({ planet, onScanClick, onColonizeClick }: { planet: Planet; onScanClick: (uuid: string) => void; onColonizeClick: (uuid: string) => void }) => {
+  const { uuid, identified, rarity, biomes, owned } = planet;
 
   return (
     <Card p="0" fontFamily={`Titillium Web`} h="370" minW="350" border={getBorder(rarity, identified)}>
@@ -20,9 +20,16 @@ export const PlanetCard = ({ planet, onScanClick }: { planet: Planet; onScanClic
         </Center>
       </CardBody>
       <CardFooter>
-        <Button colorScheme={identified ? "orange" : "teal"} size="xs" onClick={() => (identified ? alert(`${uuid} colonized`) : onScanClick(uuid))}>
-          {identified ? "Colonize" : "Scan"}
-        </Button>
+        {owned ? null : identified ? (
+          <Button colorScheme={"orange"} size="xs" onClick={() => onColonizeClick(uuid)}>
+            Colonize
+          </Button>
+        ) : (
+          <Button size="xs" onClick={() => onScanClick(uuid)}>
+            Scan
+          </Button>
+        )}
+        {}
       </CardFooter>
     </Card>
   );

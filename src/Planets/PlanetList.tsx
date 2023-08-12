@@ -7,7 +7,7 @@ type FilterOptions = {
   searchInput: string;
 };
 
-export const PlanetList = ({ planetList, handleScanClick }: { planetList: Planet[]; handleScanClick: (uuid: string) => void }) => {
+export const PlanetList = ({ planetList, handleScanClick, handleColonizeClick }: { planetList: Planet[]; handleScanClick: (uuid: string) => void; handleColonizeClick: (uuid: string) => void }) => {
   const [filterOptions, setfilterOptions] = useState<FilterOptions>({
     searchInput: "",
   });
@@ -33,7 +33,7 @@ export const PlanetList = ({ planetList, handleScanClick }: { planetList: Planet
         {filteredPlanetList.map((planet) => {
           return (
             <Box key={planet.uuid}>
-              <PlanetCard planet={planet} onScanClick={handleScanClick}></PlanetCard>
+              <PlanetCard planet={planet} onScanClick={handleScanClick} onColonizeClick={handleColonizeClick}></PlanetCard>
             </Box>
           );
         })}

@@ -23,6 +23,18 @@ const Game = () => {
     setPlanetList(newPlanetList);
   };
 
+  const handleColonizeClick = (uuid: string) => {
+    const planetToColonize = planetList.find((planet) => planet.uuid === uuid);
+
+    invariant(planetToColonize);
+
+    planetToColonize.owned = true;
+
+    const newPlanetList = [...planetList];
+
+    setPlanetList(newPlanetList);
+  };
+
   return (
     <Stack p="16px">
       <Heading as="h1" size="2xl">
@@ -36,10 +48,10 @@ const Game = () => {
         </TabList>
         <TabPanels>
           <TabPanel>
-            <PlanetList planetList={planetList} handleScanClick={handleScanClick}></PlanetList>
+            <PlanetList planetList={planetList} handleScanClick={handleScanClick} handleColonizeClick={handleColonizeClick}></PlanetList>
           </TabPanel>
           <TabPanel>
-            <PlanetList planetList={planetList.filter((planet) => planet.identified)} handleScanClick={handleScanClick}></PlanetList>
+            <PlanetList planetList={planetList.filter((planet) => planet.owned)} handleScanClick={handleScanClick} handleColonizeClick={handleColonizeClick}></PlanetList>
           </TabPanel>
           <TabPanel>Big tech</TabPanel>
         </TabPanels>

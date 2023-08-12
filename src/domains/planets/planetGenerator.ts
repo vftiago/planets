@@ -38,6 +38,7 @@ export const generatePlanet = (): Planet => {
   const planet: Planet = {
     uuid: uuid(),
     identified: false,
+    owned: false,
     rarity,
     biomes,
     quality: Math.round(quality),
