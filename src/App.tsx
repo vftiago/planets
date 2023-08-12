@@ -1,35 +1,47 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { css } from "@emotion/css";
+import { useState } from "react";
+import invariant from "tiny-invariant";
+import { Planet } from "./domains/planets/planet";
+import { generatePlanet } from "./domains/planets/planetGenerator";
+import Header from "./Header";
+import NavigationMenu from "./NavigationMenu";
+import { PlanetList } from "./Planets/PlanetList";
 
-function App() {
-  const [count, setCount] = useState(0)
+const initialPlanetList = new Array(20).fill(false).map(() => generatePlanet());
+
+const Game = () => {
+  const [planetList, setPlanetList] = useState<Planet[]>(initialPlanetList);
+
+  const handleScanClick = (uuid: string) => {
+    const planetToIdentify = planetList.find((planet) => planet.uuid === uuid);
+
+    invariant(planetToIdentify);
+
+    planetToIdentify.identified = true;
+
+    const newPlanetList = [...planetList];
+
+    setPlanetList(newPlanetList);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className={appContainerStyles}>
+      <Header />
+      <NavigationMenu />
+      <PlanetList planetList={planetList} handleScanClick={handleScanClick}></PlanetList>
+    </div>
+  );
+};
 
-export default App
+export default Game;
+
+const appContainerStyles = css`
+  height: 100vh;
+  font-family: "Red Alert", sans-serif;
+  background-color: #181a1f;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+`;
