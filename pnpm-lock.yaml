@@ -21,8 +21,8 @@ dependencies:
     specifier: ^11.11.0
     version: 11.11.0(@emotion/react@11.11.1)(@types/react@18.2.15)(react@18.2.0)
   '@lrkit/weighted':
-    specifier: ^0.1.0
-    version: 0.1.0
+    specifier: ^0.2.1
+    version: 0.2.1
   framer-motion:
     specifier: ^10.15.1
     version: 10.15.1(react-dom@18.2.0)(react@18.2.0)
@@ -1818,8 +1818,8 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
 
-  /@lrkit/weighted@0.1.0:
-    resolution: {integrity: sha512-S/U5AHRJcW/mAXBYBzOTo5uZc26d0bdPFuJFp9WpXEF2ymsl/b7e8AwkGwDg9nD8pcQ5yGjOY+2IcAHaY5S0KQ==}
+  /@lrkit/weighted@0.2.1:
+    resolution: {integrity: sha512-IQd4dxYKiOzUQ1LlMQvMTgGfWlv+m0/lvy7T6LON6LXrf2OrLhf2YFMz8ZZ6eCDb2wkWwPpHjS95+vuBFbCiqQ==}
     dependencies:
       '@types/seedrandom': 3.0.5
       seedrandom: 3.0.5

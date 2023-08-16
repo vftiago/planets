@@ -1,36 +1,61 @@
 import { Planet } from "../domains/planets/planet";
 import { Rarity } from "../domains/rarities/rarity";
-
-import { Button, Card, CardHeader, CardBody, CardFooter, Text, List, ListItem, Center, Divider } from "@chakra-ui/react";
+import { Button, Box, Text, List, ListItem, Divider, Image, Card, CardFooter, CardBody, CardHeader, Center } from "@chakra-ui/react";
+import img from "../assets/planet.gif";
 
 export const PlanetCard = ({ planet, onScanClick, onColonizeClick }: { planet: Planet; onScanClick: (uuid: string) => void; onColonizeClick: (uuid: string) => void }) => {
-  const { uuid, identified, rarity, biomes, owned } = planet;
+  const { uuid, identified, rarity, quality, biomes, owned } = planet;
 
   return (
-    <Card p="0" fontFamily={`Titillium Web`} h="370" minW="350" border={getBorder(rarity, identified)}>
-      <CardHeader>
+    <Card p="0" fontFamily={`Titillium Web`} minW="sm" border={getBorder(rarity, identified)}>
+      <CardHeader p="2">
         <Text size="sm">{uuid}</Text>
       </CardHeader>
-      <CardBody>
+      <Divider />
+      <CardBody p="0">
+        <Box p="2" background="blackAlpha.600">
+          <Center h="200">
+            <Image src={img} alt={"Planet seen from space."}></Image>
+          </Center>
+        </Box>
         <Divider />
-        <Text>{identified ? rarity : "???"}</Text>
-        <Divider />
-        <Center>
-          <List>{identified ? biomes.map((biome) => <ListItem key={`${uuid}-${biome}`}>{biome}</ListItem>) : "???"}</List>
-        </Center>
+        <Box p="o" h="130">
+          {identified ? (
+            <>
+              <Box p="2" display="flex" justifyContent="space-between">
+                <Text>{`${quality}% quality`}</Text>
+                <Text>{rarity}</Text>
+              </Box>
+              <Divider />
+              <Box p="2" background="blackAlpha.600">
+                <List>
+                  {biomes.map((biome) => (
+                    <ListItem key={`${uuid}-${biome}`}>{biome}</ListItem>
+                  ))}
+                </List>
+              </Box>
+            </>
+          ) : (
+            <Center>???</Center>
+          )}
+        </Box>
       </CardBody>
-      <CardFooter>
-        {owned ? null : identified ? (
-          <Button colorScheme={"orange"} size="xs" onClick={() => onColonizeClick(uuid)}>
-            Colonize
-          </Button>
-        ) : (
-          <Button size="xs" onClick={() => onScanClick(uuid)}>
-            Scan
-          </Button>
-        )}
-        {}
-      </CardFooter>
+      <Divider />
+      {owned ? null : (
+        <CardFooter p="2">
+          <Box>
+            {identified ? (
+              <Button colorScheme={"orange"} size="sm" onClick={() => onColonizeClick(uuid)}>
+                Colonize
+              </Button>
+            ) : (
+              <Button size="sm" onClick={() => onScanClick(uuid)}>
+                Scan
+              </Button>
+            )}
+          </Box>
+        </CardFooter>
+      )}
     </Card>
   );
 };

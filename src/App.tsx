@@ -1,9 +1,9 @@
 import { useState } from "react";
 import invariant from "tiny-invariant";
 import { Planet } from "./domains/planets/planet";
-import { generatePlanet } from "./domains/planets/planetGenerator";
+import { generatePlanet } from "./generators/planetGenerator";
 import { PlanetList } from "./Planets/PlanetList";
-import { Heading, Stack } from "@chakra-ui/react";
+import { Box, Heading, Stack } from "@chakra-ui/react";
 import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@chakra-ui/react";
 
 const initialPlanetList = new Array(20).fill(false).map(() => generatePlanet());
@@ -48,12 +48,19 @@ const Game = () => {
         </TabList>
         <TabPanels>
           <TabPanel>
+            <Heading as="h2">Galaxy</Heading>
             <PlanetList planetList={planetList} handleScanClick={handleScanClick} handleColonizeClick={handleColonizeClick}></PlanetList>
           </TabPanel>
           <TabPanel>
+            <Heading as="h2">Empire</Heading>
             <PlanetList planetList={planetList.filter((planet) => planet.owned)} handleScanClick={handleScanClick} handleColonizeClick={handleColonizeClick}></PlanetList>
           </TabPanel>
-          <TabPanel>Big tech</TabPanel>
+          <TabPanel>
+            <Heading as="h2">Technology</Heading>
+            <Box>Hydroponic Farm</Box>
+            <Box>Hydroponic Farm</Box>
+            <Box>Hydroponic Farm</Box>
+          </TabPanel>
         </TabPanels>
       </Tabs>
     </Stack>
