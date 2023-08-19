@@ -41,9 +41,11 @@ const Game = () => {
         Planets!
       </Heading>
       <Tabs>
-        <TabList>
+        <TabList fontFamily="Titillium Web">
           <Tab>Galaxy</Tab>
           <Tab>Empire</Tab>
+          <Tab>Fleet</Tab>
+          <Tab>Race</Tab>
           <Tab>Technology</Tab>
         </TabList>
         <TabPanels>
@@ -56,10 +58,17 @@ const Game = () => {
             <PlanetList planetList={planetList.filter((planet) => planet.owned)} handleScanClick={handleScanClick} handleColonizeClick={handleColonizeClick}></PlanetList>
           </TabPanel>
           <TabPanel>
+            <Heading as="h2">Fleet</Heading>
+          </TabPanel>
+          <TabPanel>
+            <Heading as="h2">Race</Heading>
+          </TabPanel>
+          <TabPanel>
             <Heading as="h2">Technology</Heading>
-            <Box>Hydroponic Farm</Box>
-            <Box>Hydroponic Farm</Box>
-            <Box>Hydroponic Farm</Box>
+            <Box>Exploration</Box>
+            <Box>Expansion</Box>
+            <Box>Exploitation</Box>
+            <Box>Externmination</Box>
           </TabPanel>
         </TabPanels>
       </Tabs>

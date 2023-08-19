@@ -4,3 +4,8 @@
   font-family: "Red Alert";
   src: url("./assets/red-alert.ttf") format("truetype");
 }
+
+@font-face {
+  font-family: "Rittswood";
+  src: url("./assets/rittswood.ttf") format("truetype");
+}

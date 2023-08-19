@@ -7,9 +7,9 @@ export const PlanetCard = ({ planet, onScanClick, onColonizeClick }: { planet: P
   const { uuid, identified, rarity, quality, biomes, owned } = planet;
 
   return (
-    <Card p="0" fontFamily={`Titillium Web`} minW="sm" border={getBorder(rarity, identified)}>
+    <Card p="0" fontFamily="Rittswood" minW="sm" border={getBorder(rarity, identified)}>
       <CardHeader p="2">
-        <Text size="sm">{uuid}</Text>
+        <Text>{uuid}</Text>
       </CardHeader>
       <Divider />
       <CardBody p="0">
