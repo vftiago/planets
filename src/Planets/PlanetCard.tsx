@@ -1,22 +1,43 @@
-import { Planet } from "../domains/planets/planet";
 import { Rarity } from "../domains/rarities/rarity";
-import { Button, Box, Text, List, ListItem, Divider, Image, Card, CardFooter, CardBody, CardHeader, Center } from "@chakra-ui/react";
-import img from "../assets/planet.gif";
+import { Canvas } from "@react-three/fiber";
+import {
+  Button,
+  Box,
+  Text,
+  List,
+  ListItem,
+  Divider,
+  Card,
+  CardFooter,
+  CardBody,
+  CardHeader,
+  Center,
+} from "@chakra-ui/react";
+import { Planet } from "../domains/planets/planet";
+import { useRef } from "react";
 
-export const PlanetCard = ({ planet, onScanClick, onColonizeClick }: { planet: Planet; onScanClick: (uuid: string) => void; onColonizeClick: (uuid: string) => void }) => {
-  const { uuid, identified, rarity, quality, biomes, owned } = planet;
+export const PlanetCard = ({
+  planet,
+  onScanClick,
+  onColonizeClick,
+}: {
+  planet: Planet;
+  onScanClick: (uuid: string) => void;
+  onColonizeClick: (uuid: string) => void;
+}) => {
+  const { uuid, identified, rarity, quality, biomes, owned, object } = planet;
+
+  const planetCanvas = useRef(<Canvas camera={{ position: [0, 0, 0.8] }}>{object}</Canvas>);
 
   return (
-    <Card p="0" fontFamily="Rittswood" minW="sm" border={getBorder(rarity, identified)}>
+    <Card p="0" fontFamily="Rittswood" w="xs" border={getBorder(rarity, identified)}>
       <CardHeader p="2">
-        <Text>{uuid}</Text>
+        <Text fontSize="sm">{uuid}</Text>
       </CardHeader>
       <Divider />
       <CardBody p="0">
         <Box p="2" background="blackAlpha.600">
-          <Center h="200">
-            <Image src={img} alt={"Planet seen from space."}></Image>
-          </Center>
+          <Center h="200">{planetCanvas.current}</Center>
         </Box>
         <Divider />
         <Box p="o" h="130">
@@ -29,8 +50,11 @@ export const PlanetCard = ({ planet, onScanClick, onColonizeClick }: { planet: P
               <Divider />
               <Box p="2" background="blackAlpha.600">
                 <List>
-                  {biomes.map((biome) => (
-                    <ListItem key={`${uuid}-${biome}`}>{biome}</ListItem>
+                  {biomes.map(({ type, output, uuid }) => (
+                    <ListItem display="flex" justifyContent="space-between" key={`${uuid}`}>
+                      <span>{type}</span>
+                      <span>{output}%</span>
+                    </ListItem>
                   ))}
                 </List>
               </Box>

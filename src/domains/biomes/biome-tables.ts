@@ -4,11 +4,11 @@ import { BiomeType } from "./biome";
 export const biomeQuantities: WeightedItem<number>[] = [
   {
     item: 3,
-    weight: 20,
+    weight: 10,
   },
   {
     item: 2,
-    weight: 7,
+    weight: 5,
   },
   {
     item: 1,

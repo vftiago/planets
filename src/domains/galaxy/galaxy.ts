@@ -1,4 +1,5 @@
 import { Rarity } from "../rarities/rarity";
+import { StarSize, StarTemperature } from "../star/star";
 
 export const DEFAULT_MEAN_QUALITY = 100;
 export const DEFAULT_STANDARD_DEVIATION = 20;

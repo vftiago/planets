@@ -1,12 +1,14 @@
 import { v4 as uuid } from "uuid";
 import { DEFAULT_MEAN_QUALITY, DEFAULT_STANDARD_DEVIATION, Planet } from "../domains/planets/planet";
-import { biomeQuantityTable, biomeTable, rarityTable } from "../domains/planets/planet-tables";
+import { biomeQuantityTable, rarityTable } from "../domains/planets/planet-tables";
 import { getNormallyDistributedRandomNumber } from "./utils";
+import { generateBiomes } from "./biomeGenerator";
+import PlanetObject from "../3d/Planet/Planet";
 
 export const generatePlanet = (): Planet => {
   const rarity = rarityTable.pick();
   const biomeQuantity = biomeQuantityTable.pick();
-  const biomes = biomeTable.pick({ quantity: biomeQuantity, exclusive: true });
+  const biomes = generateBiomes(biomeQuantity);
 
   const quality = getNormallyDistributedRandomNumber(DEFAULT_MEAN_QUALITY, DEFAULT_STANDARD_DEVIATION);
 
@@ -17,6 +19,7 @@ export const generatePlanet = (): Planet => {
     rarity,
     biomes,
     quality: Math.round(quality),
+    object: <PlanetObject />,
   };
 
   return planet;

@@ -6,7 +6,7 @@ import { PlanetList } from "./Planets/PlanetList";
 import { Box, Heading, Stack } from "@chakra-ui/react";
 import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@chakra-ui/react";
 
-const initialPlanetList = new Array(20).fill(false).map(() => generatePlanet());
+const initialPlanetList = new Array(10).fill(false).map(() => generatePlanet());
 
 const Game = () => {
   const [planetList, setPlanetList] = useState<Planet[]>(initialPlanetList);
@@ -51,11 +51,19 @@ const Game = () => {
         <TabPanels>
           <TabPanel>
             <Heading as="h2">Galaxy</Heading>
-            <PlanetList planetList={planetList} handleScanClick={handleScanClick} handleColonizeClick={handleColonizeClick}></PlanetList>
+            <PlanetList
+              planetList={planetList}
+              handleScanClick={handleScanClick}
+              handleColonizeClick={handleColonizeClick}
+            ></PlanetList>
           </TabPanel>
           <TabPanel>
             <Heading as="h2">Empire</Heading>
-            <PlanetList planetList={planetList.filter((planet) => planet.owned)} handleScanClick={handleScanClick} handleColonizeClick={handleColonizeClick}></PlanetList>
+            <PlanetList
+              planetList={planetList.filter((planet) => planet.owned)}
+              handleScanClick={handleScanClick}
+              handleColonizeClick={handleColonizeClick}
+            ></PlanetList>
           </TabPanel>
           <TabPanel>
             <Heading as="h2">Fleet</Heading>

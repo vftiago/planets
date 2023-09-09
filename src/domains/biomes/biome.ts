@@ -18,4 +18,5 @@ export enum BiomeSubType {
 
 export interface Biome extends GameEntity {
   type: BiomeType;
+  output: number;
 }

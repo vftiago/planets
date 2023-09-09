@@ -1,5 +1,5 @@
 import { addWeight } from "@lrkit/weighted";
-import { StarSize, StarTemperature } from "./star";
+import { StarSize, StarTemperature } from "./galaxy";
 
 const starSizes = [StarSize.XS, StarSize.S, StarSize.M, StarSize.L, StarSize.XL];
 const starTemperatures = [StarTemperature.RED, StarTemperature.ORANGE, StarTemperature.YELLOW, StarTemperature.WHITE, StarTemperature.BLUE];

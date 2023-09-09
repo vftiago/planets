@@ -1,0 +1,7 @@
+/build
+/dist
+package.json
+pnpm-lock.json
+*.frag
+*.vert
+LICENSE
