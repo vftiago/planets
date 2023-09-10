@@ -6,6 +6,7 @@ import PlanetCloudObject from "../layers/cloud/PlanetCloud";
 import PlanetAtmosphereObject from "../layers/atmosphere/PlanetAtmosphere";
 import PlanetRiversObject from "../layers/rivers/PlanetRivers";
 import { EARTH_COLORS } from "../colors";
+import { PerspectiveCamera } from "@react-three/drei";
 
 type PlanetObjectProps = {
   seed: number;
@@ -20,6 +21,7 @@ const PlanetObject = (planetObjectProps: PlanetObjectProps) => {
       <PlanetRiversObject {...planetObjectProps} />
       <PlanetCloudObject {...planetObjectProps} />
       <PlanetAtmosphereObject {...planetObjectProps} />
+      <PerspectiveCamera makeDefault fov={90} position={[0, 0, 0.6]} />
     </group>
   );
 };

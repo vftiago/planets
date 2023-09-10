@@ -4,27 +4,38 @@ import { biomeQuantityTable, rarityTable } from "../domains/planets/planet-table
 import { getNormallyDistributedRandomNumber } from "./utils";
 import { generateBiomes } from "./biomeGenerator";
 import seedrandom from "seedrandom";
+import { MutableRefObject, useRef } from "react";
 
-export const generatePlanet = (): Planet => {
-  const rarity = rarityTable.pick();
-  const biomeQuantity = biomeQuantityTable.pick();
-  const biomes = generateBiomes(biomeQuantity);
+export const useGeneratePlanet = (quantity = 8): Planet[] => {
+  const planets: Planet[] = [];
 
-  const quality = getNormallyDistributedRandomNumber(DEFAULT_MEAN_QUALITY, DEFAULT_STANDARD_DEVIATION);
+  for (let i = 0; i < quantity; i++) {
+    const rarity = rarityTable.pick();
+    const biomeQuantity = biomeQuantityTable.pick();
+    const biomes = generateBiomes(biomeQuantity);
 
-  const uuid = v4();
+    const quality = getNormallyDistributedRandomNumber(DEFAULT_MEAN_QUALITY, DEFAULT_STANDARD_DEVIATION);
 
-  const prng = seedrandom(uuid);
+    const uuid = v4();
 
-  const planet: Planet = {
-    uuid,
-    seed: prng(),
-    identified: false,
-    owned: false,
-    rarity,
-    biomes,
-    quality: Math.round(quality),
-  };
+    const prng = seedrandom(uuid);
 
-  return planet;
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const planetRef = useRef<HTMLDivElement>(null) as MutableRefObject<HTMLDivElement>;
+
+    const planet: Planet = {
+      uuid,
+      planetRef,
+      seed: prng(),
+      identified: false,
+      owned: false,
+      rarity,
+      biomes,
+      quality: Math.round(quality),
+    };
+
+    planets.push(planet);
+  }
+
+  return planets;
 };

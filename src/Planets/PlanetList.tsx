@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, RefObject, useState } from "react";
 import { Planet } from "../domains/planets/planet";
 import { PlanetCard } from "./PlanetCard";
 import { Box, Input, Stack, Wrap } from "@chakra-ui/react";
@@ -8,10 +8,12 @@ type FilterOptions = {
 };
 
 export const PlanetList = ({
+  eventSourceRef,
   planetList,
   handleScanClick,
   handleColonizeClick,
 }: {
+  eventSourceRef: RefObject<HTMLDivElement>;
   planetList: Planet[];
   handleScanClick: (uuid: string) => void;
   handleColonizeClick: (uuid: string) => void;
@@ -36,7 +38,7 @@ export const PlanetList = ({
   return (
     <Stack spacing="16px">
       <Input size="lg" onChange={handleSearchInputChange} />
-      <Wrap spacing={8}>
+      <Wrap spacing={8} ref={eventSourceRef}>
         {filteredPlanetList.map((planet) => {
           return (
             <Box key={planet.uuid}>

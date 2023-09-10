@@ -1,15 +1,25 @@
-import { useState } from "react";
+import { MutableRefObject, useRef, useState } from "react";
 import invariant from "tiny-invariant";
 import { Planet } from "./domains/planets/planet";
-import { generatePlanet } from "./generators/planetGenerator";
+import { useGeneratePlanet } from "./generators/planetGenerator";
 import { PlanetList } from "./Planets/PlanetList";
 import { Box, Heading, Stack } from "@chakra-ui/react";
 import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@chakra-ui/react";
-
-const initialPlanetList = new Array(8).fill(false).map(() => generatePlanet());
+import { Canvas } from "@react-three/fiber";
+import PlanetView from "./Planets/PlanetVIew";
 
 const Game = () => {
+  const initialPlanetList = useGeneratePlanet(16);
+
   const [planetList, setPlanetList] = useState<Planet[]>(initialPlanetList);
+
+  const eventSourceRef = useRef<HTMLDivElement>(null);
+
+  const [tabIndex, setTabIndex] = useState(0);
+
+  const handleTabsChange = (index: number) => {
+    setTabIndex(index);
+  };
 
   const handleScanClick = (uuid: string) => {
     const planetToIdentify = planetList.find((planet) => planet.uuid === uuid);
@@ -35,12 +45,16 @@ const Game = () => {
     setPlanetList(newPlanetList);
   };
 
+  const currentPlanetList = tabIndex === 0 ? planetList : planetList.filter((planet) => planet.owned);
+
+  const shouldRenderPlanets = currentPlanetList.length > 0 && (tabIndex === 0 || tabIndex === 1);
+
   return (
     <Stack p="16px">
       <Heading as="h1" size="2xl">
         Planets!
       </Heading>
-      <Tabs>
+      <Tabs isLazy onChange={handleTabsChange}>
         <TabList fontFamily="Titillium Web">
           <Tab>Galaxy</Tab>
           <Tab>Empire</Tab>
@@ -51,19 +65,25 @@ const Game = () => {
         <TabPanels>
           <TabPanel>
             <Heading as="h2">Galaxy</Heading>
-            <PlanetList
-              planetList={planetList}
-              handleScanClick={handleScanClick}
-              handleColonizeClick={handleColonizeClick}
-            ></PlanetList>
+            {tabIndex === 0 ? (
+              <PlanetList
+                eventSourceRef={eventSourceRef}
+                planetList={currentPlanetList}
+                handleScanClick={handleScanClick}
+                handleColonizeClick={handleColonizeClick}
+              ></PlanetList>
+            ) : null}
           </TabPanel>
           <TabPanel>
             <Heading as="h2">Empire</Heading>
-            <PlanetList
-              planetList={planetList.filter((planet) => planet.owned)}
-              handleScanClick={handleScanClick}
-              handleColonizeClick={handleColonizeClick}
-            ></PlanetList>
+            {tabIndex === 1 ? (
+              <PlanetList
+                eventSourceRef={eventSourceRef}
+                planetList={currentPlanetList}
+                handleScanClick={handleScanClick}
+                handleColonizeClick={handleColonizeClick}
+              ></PlanetList>
+            ) : null}
           </TabPanel>
           <TabPanel>
             <Heading as="h2">Fleet</Heading>
@@ -80,6 +100,22 @@ const Game = () => {
           </TabPanel>
         </TabPanels>
       </Tabs>
+      <Canvas
+        eventSource={eventSourceRef as MutableRefObject<HTMLElement>}
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100vw",
+          height: "100vh",
+          pointerEvents: "none",
+        }}
+      >
+        {shouldRenderPlanets &&
+          currentPlanetList.map(({ uuid, seed, planetRef }) => {
+            return <PlanetView key={uuid} seed={seed} planetRef={planetRef} />;
+          })}
+      </Canvas>
     </Stack>
   );
 };

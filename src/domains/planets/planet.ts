@@ -1,3 +1,4 @@
+import { MutableRefObject } from "react";
 import { Biome } from "../biomes/biome";
 import { Rarity } from "../rarities/rarity";
 
@@ -15,6 +16,7 @@ export interface Planet extends GameEntity {
   owned: boolean;
   biomes: Biome[];
   seed: number;
+  planetRef: MutableRefObject<HTMLDivElement>;
 }
 
 export interface Colony extends Planet {
