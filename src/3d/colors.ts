@@ -6,6 +6,13 @@ export const BASE_COLORS = [
   new THREE.Vector4(53 / 255, 57 / 255, 85 / 255, 1),
 ];
 
+export const EARTH_COLORS = [
+  new THREE.Vector4(0.388, 0.671, 0.247, 1),
+  new THREE.Vector4(0.231, 0.49, 0.31, 1),
+  new THREE.Vector4(0.184, 0.341, 0.325, 1),
+  new THREE.Vector4(0.157, 0.208, 0.251, 1),
+];
+
 export const BASE_LAND_COLORS = [
   new THREE.Vector4(0.784314, 0.831373, 0.364706, 1),
   new THREE.Vector4(0.388235, 0.670588, 0.247059, 1),
@@ -25,8 +32,8 @@ export const BASE_ATMOSPHERE_COLORS = [
   new THREE.Vector4(0 / 255, 0 / 255, 128 / 255, 0.45),
 ];
 
-export const EARTH_COLORS = [
-  new THREE.Vector4(102 / 255, 176 / 255, 199 / 255, 1),
-  new THREE.Vector4(102 / 255, 176 / 255, 199 / 255, 1),
-  new THREE.Vector4(52 / 255, 65 / 255, 157 / 255, 1),
+export const BASE_RIVER_COLORS = [
+  new THREE.Vector4(79 / 255, 164 / 255, 184 / 255, 1),
+  new THREE.Vector4(76 / 255, 104 / 255, 133 / 255, 1),
+  new THREE.Vector4(58 / 255, 63 / 255, 94 / 255, 1),
 ];

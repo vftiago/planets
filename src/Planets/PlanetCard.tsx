@@ -15,6 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { Planet } from "../domains/planets/planet";
 import { useRef } from "react";
+import PlanetObject from "../3d/Planet/Planet";
 
 export const PlanetCard = ({
   planet,
@@ -25,9 +26,9 @@ export const PlanetCard = ({
   onScanClick: (uuid: string) => void;
   onColonizeClick: (uuid: string) => void;
 }) => {
-  const { uuid, identified, rarity, quality, biomes, owned, object } = planet;
+  const { uuid, identified, rarity, quality, biomes, owned, seed } = planet;
 
-  const planetCanvas = useRef(<Canvas camera={{ position: [0, 0, 0.8] }}>{object}</Canvas>);
+  const planetObjectRef = useRef(<PlanetObject seed={seed} />);
 
   return (
     <Card p="0" fontFamily="Rittswood" w="xs" border={getBorder(rarity, identified)}>
@@ -37,7 +38,9 @@ export const PlanetCard = ({
       <Divider />
       <CardBody p="0">
         <Box p="2" background="blackAlpha.600">
-          <Center h="200">{planetCanvas.current}</Center>
+          <Center h="200">
+            <Canvas camera={{ position: [0, 0, 0.8] }}>{planetObjectRef.current}</Canvas>
+          </Center>
         </Box>
         <Divider />
         <Box p="o" h="130">

@@ -4,37 +4,33 @@ import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import * as THREE from "three";
 
-import fragmentShader from "./cloud-base.frag";
-import vertexShader from "./cloud-base.vert";
-import { BASE_CLOUD_COLORS } from "../../colors";
+import fragmentShader from "./planet-rivers.frag";
+import vertexShader from "./planet-rivers.vert";
+import { BASE_RIVER_COLORS } from "../../colors";
 import { DEFAULT_TIME_VALUE_UPDATE } from "../../constants";
 
-type PlanetBaseProps = {
+type PlanetRiversProps = {
   meshProps?: JSX.IntrinsicElements["mesh"];
-  seed: number;
-  colors?: THREE.Vector4[];
   lightPos?: THREE.Vector2;
-  lightIntensity?: number;
   rotationSpeed?: number;
+  rivers?: number;
+  colors?: THREE.Vector4[];
   rotation?: number;
-  land?: number;
-  cloudCover?: number;
-  stretch?: number;
+  seed: number;
 };
 
-const PlanetCloudObject = ({
+const PlanetRiversObject = ({
   meshProps,
-  colors,
-  seed,
   lightPos = new THREE.Vector2(0.39, 0.7),
   rotationSpeed = 0.1,
+  rivers = 0.6,
+  colors,
   rotation = Math.random(),
-  cloudCover = 0.546,
-  stretch = 2.5,
-}: PlanetBaseProps) => {
+  seed,
+}: PlanetRiversProps) => {
   const materialRef = useRef<THREE.ShaderMaterial>(null);
 
-  const colorPalette = useMemo(() => (colors ? colors : BASE_CLOUD_COLORS), [colors]);
+  const colorPalette = useMemo(() => (colors ? colors : BASE_RIVER_COLORS), [colors]);
 
   useLayoutEffect(() => {
     if (!materialRef.current) {
@@ -43,21 +39,18 @@ const PlanetCloudObject = ({
 
     const uniforms = {
       light_origin: { value: lightPos },
-      pixels: { value: 100.0 },
       seed: { value: seed },
       time_speed: { value: rotationSpeed },
-      base_color: { value: colorPalette[0] },
-      outline_color: { value: colorPalette[1] },
-      shadow_base_color: { value: colorPalette[2] },
-      shadow_outline_color: { value: colorPalette[3] },
-      cloud_cover: { value: cloudCover },
+      river_cutoff: { value: rivers },
       rotation: { value: rotation },
-      stretch: { value: stretch },
+      color1: { value: colorPalette[0] },
+      color2: { value: colorPalette[1] },
+      color3: { value: colorPalette[2] },
       time: { value: 0.0 },
     };
 
     materialRef.current.uniforms = uniforms;
-  }, [colorPalette, cloudCover, lightPos, seed, rotation, rotationSpeed, stretch]);
+  }, [colorPalette, lightPos, seed, rotation, rivers, rotationSpeed]);
 
   useFrame(() => {
     if (!materialRef.current) {
@@ -84,4 +77,4 @@ const PlanetCloudObject = ({
   );
 };
 
-export default PlanetCloudObject;
+export default PlanetRiversObject;

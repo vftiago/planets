@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useLayoutEffect, useMemo } from "react";
 
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
@@ -15,12 +15,11 @@ type PlanetBaseProps = {
 };
 
 const PlanetAtmosphereObject = ({ meshProps, colors }: PlanetBaseProps) => {
-  const ref = useRef<THREE.Mesh>(null);
   const materialRef = useRef<THREE.ShaderMaterial>(null);
 
   const colorPalette = useMemo(() => (colors ? colors : BASE_ATMOSPHERE_COLORS), [colors]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!materialRef.current) {
       return;
     }
@@ -47,7 +46,7 @@ const PlanetAtmosphereObject = ({ meshProps, colors }: PlanetBaseProps) => {
   });
 
   return (
-    <mesh {...meshProps} ref={ref}>
+    <mesh {...meshProps}>
       <planeGeometry args={[1.02, 1.02]} />
       <shaderMaterial
         ref={materialRef}

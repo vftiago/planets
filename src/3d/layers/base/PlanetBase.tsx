@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useLayoutEffect, useMemo } from "react";
 
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
@@ -11,16 +11,17 @@ import { DEFAULT_TIME_VALUE_UPDATE } from "../../constants";
 
 type PlanetBaseProps = {
   meshProps?: JSX.IntrinsicElements["mesh"];
+  seed: number;
   colors?: THREE.Vector4[];
+  rotation?: number;
 };
 
-const PlanetBaseObject = ({ meshProps, colors }: PlanetBaseProps) => {
-  const ref = useRef<THREE.Mesh>(null);
+const PlanetBaseObject = ({ meshProps, seed, colors, rotation = Math.random() }: PlanetBaseProps) => {
   const materialRef = useRef<THREE.ShaderMaterial>(null);
 
   const colorPalette = useMemo(() => (colors ? colors : BASE_COLORS), [colors]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!materialRef.current) {
       return;
     }
@@ -33,13 +34,13 @@ const PlanetBaseObject = ({ meshProps, colors }: PlanetBaseProps) => {
       lightIntensity: { value: 0.1 },
       light_origin: { value: new THREE.Vector2(0.39, 0.7) },
       time_speed: { value: 0.1 },
-      rotation: { value: 0.0 },
-      seed: { value: Math.random() > 0.5 ? Math.random() * 10 : Math.random() * 100 },
+      rotation: { value: rotation },
+      seed: { value: seed },
       time: { value: 0.0 },
     };
 
     materialRef.current.uniforms = uniforms;
-  }, [colorPalette]);
+  }, [colorPalette, seed]);
 
   useFrame(() => {
     if (!materialRef.current) {
@@ -54,7 +55,7 @@ const PlanetBaseObject = ({ meshProps, colors }: PlanetBaseProps) => {
   });
 
   return (
-    <mesh {...meshProps} ref={ref}>
+    <mesh {...meshProps}>
       <planeGeometry args={[1, 1]} />
       <shaderMaterial
         ref={materialRef}

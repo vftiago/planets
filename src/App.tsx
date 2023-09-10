@@ -6,7 +6,7 @@ import { PlanetList } from "./Planets/PlanetList";
 import { Box, Heading, Stack } from "@chakra-ui/react";
 import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@chakra-ui/react";
 
-const initialPlanetList = new Array(10).fill(false).map(() => generatePlanet());
+const initialPlanetList = new Array(8).fill(false).map(() => generatePlanet());
 
 const Game = () => {
   const [planetList, setPlanetList] = useState<Planet[]>(initialPlanetList);

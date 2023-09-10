@@ -4,18 +4,22 @@ import PlanetBaseObject from "../layers/base/PlanetBase";
 import PlanetLandObject from "../layers/land/PlanetLand";
 import PlanetCloudObject from "../layers/cloud/PlanetCloud";
 import PlanetAtmosphereObject from "../layers/atmosphere/PlanetAtmosphere";
+import PlanetRiversObject from "../layers/rivers/PlanetRivers";
+import { EARTH_COLORS } from "../colors";
 
-type PlanetProps = {
+type PlanetObjectProps = {
+  seed: number;
   colors?: THREE.Vector4[];
 };
 
-const PlanetObject = ({ colors }: PlanetProps) => {
+const PlanetObject = (planetObjectProps: PlanetObjectProps) => {
   return (
     <group>
-      <PlanetBaseObject colors={colors} />
-      <PlanetLandObject colors={colors} />
-      <PlanetCloudObject colors={colors} />
-      <PlanetAtmosphereObject colors={colors} />
+      <PlanetBaseObject {...planetObjectProps} colors={EARTH_COLORS} />
+      <PlanetLandObject {...planetObjectProps} />
+      <PlanetRiversObject {...planetObjectProps} />
+      <PlanetCloudObject {...planetObjectProps} />
+      <PlanetAtmosphereObject {...planetObjectProps} />
     </group>
   );
 };

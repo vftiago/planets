@@ -1,4 +1,3 @@
-import { ReactElement } from "react";
 import { Biome } from "../biomes/biome";
 import { Rarity } from "../rarities/rarity";
 
@@ -15,7 +14,7 @@ export interface Planet extends GameEntity {
   identified: boolean;
   owned: boolean;
   biomes: Biome[];
-  object: ReactElement;
+  seed: number;
 }
 
 export interface Colony extends Planet {
