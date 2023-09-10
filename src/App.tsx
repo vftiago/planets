@@ -9,7 +9,7 @@ import { Canvas } from "@react-three/fiber";
 import PlanetView from "./Planets/PlanetVIew";
 
 const Game = () => {
-  const initialPlanetList = useGeneratePlanet(16);
+  const initialPlanetList = useGeneratePlanet(32);
 
   const [planetList, setPlanetList] = useState<Planet[]>(initialPlanetList);
 

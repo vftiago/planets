@@ -16,6 +16,7 @@ type PlanetObjectProps = {
 const PlanetObject = (planetObjectProps: PlanetObjectProps) => {
   return (
     <group>
+      {/* <PlanetBackgroundObject {...planetObjectProps} meshProps={{ position: [0, 0, 0], receiveShadow: false }} /> */}
       <PlanetBaseObject {...planetObjectProps} colors={EARTH_COLORS} />
       <PlanetLandObject {...planetObjectProps} />
       <PlanetRiversObject {...planetObjectProps} />
