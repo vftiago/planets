@@ -112,8 +112,8 @@ const Game = () => {
         }}
       >
         {shouldRenderPlanets &&
-          currentPlanetList.map(({ uuid, seed, planetRef }) => {
-            return <PlanetView key={uuid} seed={seed} planetRef={planetRef} />;
+          currentPlanetList.map(({ uuid, seed, type, planetRef }) => {
+            return <PlanetView key={uuid} seed={seed} type={type} planetRef={planetRef} />;
           })}
       </Canvas>
     </Stack>

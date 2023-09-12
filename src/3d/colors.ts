@@ -13,6 +13,11 @@ export const EARTH_COLORS = [
   new THREE.Vector4(0.157, 0.208, 0.251, 1),
 ];
 
+export const BASE_CRATER_COLORS = [
+  new THREE.Vector4(71 / 255, 97 / 255, 124 / 255, 1),
+  new THREE.Vector4(53 / 255, 57 / 255, 85 / 255, 1),
+];
+
 export const BASE_LAND_COLORS = [
   new THREE.Vector4(0.784314, 0.831373, 0.364706, 1),
   new THREE.Vector4(0.388235, 0.670588, 0.247059, 1),

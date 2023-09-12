@@ -5,6 +5,11 @@ import { Rarity } from "../rarities/rarity";
 export const DEFAULT_MEAN_QUALITY = 100;
 export const DEFAULT_STANDARD_DEVIATION = 20;
 
+export enum PlanetType {
+  Terran = "Terran",
+  NoAtmosphere = "NoAtmosphere",
+}
+
 export type GameEntity = {
   uuid: string;
 };
@@ -15,6 +20,7 @@ export interface Planet extends GameEntity {
   identified: boolean;
   owned: boolean;
   biomes: Biome[];
+  type: PlanetType;
   seed: number;
   planetRef: MutableRefObject<HTMLDivElement>;
 }

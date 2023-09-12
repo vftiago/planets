@@ -1,41 +1,52 @@
-import { useLayoutEffect } from "react";
+import React, { useLayoutEffect, useMemo } from "react";
 
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import * as THREE from "three";
 
-import fragmentShader from "./planet-background.frag";
-import vertexShader from "./planet-background.vert";
+import fragmentShader from "./crater-base.frag";
+import vertexShader from "./crater-base.vert";
+import { BASE_CRATER_COLORS } from "../../colors";
 import { DEFAULT_TIME_VALUE_UPDATE } from "../../constants";
-import { useTexture } from "@react-three/drei";
-import color from "./color.png";
 
 type PlanetBaseProps = {
   meshProps?: JSX.IntrinsicElements["mesh"];
   seed: number;
+  colors?: THREE.Vector4[];
+  lightPos?: THREE.Vector2;
+  rotationSpeed?: number;
+  rotation?: number;
 };
 
-// looks bad. try to find a better nebula-style fragment shader online
-const PlanetBackgroundObject = ({ meshProps, seed }: PlanetBaseProps) => {
+const PlanetCraterObject = ({
+  meshProps,
+  colors,
+  lightPos = new THREE.Vector2(0.39, 0.7),
+  rotationSpeed = 0.1,
+  rotation = Math.random(),
+  seed,
+}: PlanetBaseProps) => {
   const materialRef = useRef<THREE.ShaderMaterial>(null);
 
-  const { colorSchemeTexture } = useTexture({ colorSchemeTexture: color });
+  const colorPalette = useMemo(() => (colors ? colors : BASE_CRATER_COLORS), [colors]);
 
   useLayoutEffect(() => {
     if (!materialRef.current) {
       return;
     }
 
-    colorSchemeTexture.magFilter = THREE.NearestFilter;
-    colorSchemeTexture.minFilter = THREE.NearestFilter;
-
     const uniforms = {
-      colorscheme: { value: colorSchemeTexture },
+      color1: { value: colorPalette[0] },
+      color2: { value: colorPalette[1] },
+      light_origin: { value: lightPos },
+      time_speed: { value: rotationSpeed },
+      rotation: { value: rotation },
       seed: { value: seed },
+      time: { value: 0.0 },
     };
 
     materialRef.current.uniforms = uniforms;
-  }, [colorSchemeTexture, seed]);
+  }, [colorPalette, lightPos, rotationSpeed, rotation, seed]);
 
   useFrame(() => {
     if (!materialRef.current) {
@@ -51,7 +62,7 @@ const PlanetBackgroundObject = ({ meshProps, seed }: PlanetBaseProps) => {
 
   return (
     <mesh {...meshProps}>
-      <planeGeometry args={[3, 3]} />
+      <planeGeometry args={[1, 1]} />
       <shaderMaterial
         ref={materialRef}
         vertexShader={vertexShader}
@@ -62,4 +73,4 @@ const PlanetBackgroundObject = ({ meshProps, seed }: PlanetBaseProps) => {
   );
 };
 
-export default PlanetBackgroundObject;
+export default PlanetCraterObject;

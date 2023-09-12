@@ -1,11 +1,20 @@
 import { View } from "@react-three/drei";
-import PlanetObject from "../3d/Planet/Planet";
 import { MutableRefObject, useRef } from "react";
+import Planet from "../3d/Planet/Planet";
+import { PlanetType } from "../domains/planets/planet";
 
-const PlanetView = ({ seed, planetRef }: { seed: number; planetRef: MutableRefObject<HTMLElement> }) => {
+const PlanetView = ({
+  seed,
+  type,
+  planetRef,
+}: {
+  seed: number;
+  type: PlanetType;
+  planetRef: MutableRefObject<HTMLElement>;
+}) => {
   const viewRef = useRef(
     <View track={planetRef}>
-      <PlanetObject seed={seed} />
+      <Planet seed={seed} type={type} />
     </View>
   );
 

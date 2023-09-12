@@ -1,5 +1,5 @@
 import { v4 } from "uuid";
-import { DEFAULT_MEAN_QUALITY, DEFAULT_STANDARD_DEVIATION, Planet } from "../domains/planets/planet";
+import { DEFAULT_MEAN_QUALITY, DEFAULT_STANDARD_DEVIATION, Planet, PlanetType } from "../domains/planets/planet";
 import { biomeQuantityTable, rarityTable } from "../domains/planets/planet-tables";
 import { getNormallyDistributedRandomNumber } from "./utils";
 import { generateBiomes } from "./biomeGenerator";
@@ -31,6 +31,7 @@ export const useGeneratePlanet = (quantity = 8): Planet[] => {
       owned: false,
       rarity,
       biomes,
+      type: Math.random() > 0.5 ? PlanetType.Terran : PlanetType.NoAtmosphere,
       quality: Math.round(quality),
     };
 

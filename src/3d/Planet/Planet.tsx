@@ -1,30 +1,14 @@
-import * as THREE from "three";
-
-import PlanetBaseObject from "../layers/base/PlanetBase";
-import PlanetLandObject from "../layers/land/PlanetLand";
-import PlanetCloudObject from "../layers/cloud/PlanetCloud";
-import PlanetAtmosphereObject from "../layers/atmosphere/PlanetAtmosphere";
-import PlanetRiversObject from "../layers/rivers/PlanetRivers";
-import { EARTH_COLORS } from "../colors";
-import { PerspectiveCamera } from "@react-three/drei";
+import Terran from "./Terran";
+import NoAtmosphere from "./NoAtmosphere";
+import { PlanetType } from "../../domains/planets/planet";
 
 type PlanetObjectProps = {
   seed: number;
-  colors?: THREE.Vector4[];
+  type: PlanetType;
 };
 
-const PlanetObject = (planetObjectProps: PlanetObjectProps) => {
-  return (
-    <group>
-      {/* <PlanetBackgroundObject {...planetObjectProps} meshProps={{ position: [0, 0, 0], receiveShadow: false }} /> */}
-      <PlanetBaseObject {...planetObjectProps} colors={EARTH_COLORS} />
-      <PlanetLandObject {...planetObjectProps} />
-      <PlanetRiversObject {...planetObjectProps} />
-      <PlanetCloudObject {...planetObjectProps} />
-      <PlanetAtmosphereObject {...planetObjectProps} />
-      <PerspectiveCamera makeDefault fov={90} position={[0, 0, 0.6]} />
-    </group>
-  );
+const Planet = ({ seed, type }: PlanetObjectProps) => {
+  return type === PlanetType.Terran ? <Terran seed={seed} /> : <NoAtmosphere seed={seed} />;
 };
 
-export default PlanetObject;
+export default Planet;
