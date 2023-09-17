@@ -6,8 +6,13 @@ export const DEFAULT_MEAN_QUALITY = 100;
 export const DEFAULT_STANDARD_DEVIATION = 20;
 
 export enum PlanetType {
+  Gas = "Gas",
+  GasRing = "GasRing",
   Terran = "Terran",
   NoAtmosphere = "NoAtmosphere",
+  Arid = "Arid",
+  Lava = "Lava",
+  Ice = "Ice",
 }
 
 export type GameEntity = {

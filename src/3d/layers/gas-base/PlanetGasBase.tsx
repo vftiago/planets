@@ -1,15 +1,15 @@
-import React, { useLayoutEffect, useMemo } from "react";
+import { useLayoutEffect, useMemo } from "react";
 
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import * as THREE from "three";
 
-import fragmentShader from "./planet-land.frag";
-import vertexShader from "./planet-land.vert";
-import { BASE_LAND_COLORS } from "../../colors";
+import fragmentShader from "./planet-gas-base.frag";
+import vertexShader from "./planet-gas-base.vert";
+import { GAS_BASE_COLORS } from "../../colors";
 import { DEFAULT_TIME_VALUE_UPDATE } from "../../constants";
 
-type PlanetBaseProps = {
+type PlanetGasBaseProps = {
   meshProps?: JSX.IntrinsicElements["mesh"];
   seed: number;
   colors?: THREE.Vector4[];
@@ -18,21 +18,25 @@ type PlanetBaseProps = {
   rotationSpeed?: number;
   rotation?: number;
   land?: number;
+  cloudCover?: number;
+  cloudCurve?: number;
+  stretch?: number;
 };
 
-const PlanetLandObject = ({
+const PlanetGasBaseObject = ({
   meshProps,
-  lightPos = new THREE.Vector2(0.39, 0.7),
-  lightIntensity = 0.1,
-  colors,
+  cloudCover = 0.0,
+  cloudCurve = 0.0,
   seed,
+  colors,
+  rotation = 80.0,
+  stretch = 1.0,
   rotationSpeed = 0.1,
-  rotation = Math.random(),
-  land = 0.5,
-}: PlanetBaseProps) => {
+  lightPos = new THREE.Vector2(0.39, 0.7),
+}: PlanetGasBaseProps) => {
   const materialRef = useRef<THREE.ShaderMaterial>(null);
 
-  const colorPalette = useMemo(() => (colors ? colors : BASE_LAND_COLORS), [colors]);
+  const colorPalette = useMemo(() => (colors ? colors : GAS_BASE_COLORS), [colors]);
 
   useLayoutEffect(() => {
     if (!materialRef.current) {
@@ -40,22 +44,22 @@ const PlanetLandObject = ({
     }
 
     const uniforms = {
-      pixels: { value: 100.0 },
-      land_cutoff: { value: land },
-      col1: { value: colorPalette[0] },
-      col2: { value: colorPalette[1] },
-      col3: { value: colorPalette[2] },
-      col4: { value: colorPalette[3] },
-      lightIntensity: { value: lightIntensity },
-      light_origin: { value: lightPos },
+      base_color: { value: colorPalette[0] },
+      outline_color: { value: colorPalette[1] },
+      shadow_base_color: { value: colorPalette[2] },
+      shadow_outline_color: { value: colorPalette[3] },
+      cloud_cover: { value: cloudCover },
+      stretch: { value: stretch },
+      cloud_curve: { value: cloudCurve },
       time_speed: { value: rotationSpeed },
       rotation: { value: rotation },
+      light_origin: { value: lightPos },
       seed: { value: seed },
       time: { value: 0.0 },
     };
 
     materialRef.current.uniforms = uniforms;
-  }, [colorPalette, land, lightIntensity, lightPos, seed, rotation, rotationSpeed]);
+  }, [colorPalette, seed, lightPos, rotation, rotationSpeed, stretch, cloudCover, cloudCurve]);
 
   useFrame(() => {
     if (!materialRef.current) {
@@ -80,4 +84,4 @@ const PlanetLandObject = ({
   );
 };
 
-export default PlanetLandObject;
+export default PlanetGasBaseObject;

@@ -66,8 +66,6 @@ const PlanetCloudObject = ({
 
     const uniforms = materialRef.current.uniforms;
 
-    uniforms.time = uniforms.time || { value: 0 };
-
     uniforms.time.value += DEFAULT_TIME_VALUE_UPDATE;
   });
 

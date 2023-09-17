@@ -8,7 +8,7 @@ import fragmentShader from "./planet-background.frag";
 import vertexShader from "./planet-background.vert";
 import { DEFAULT_TIME_VALUE_UPDATE } from "../../constants";
 import { useTexture } from "@react-three/drei";
-import color from "./color.png";
+import color from "./palette.png";
 
 type PlanetBaseProps = {
   meshProps?: JSX.IntrinsicElements["mesh"];
@@ -43,8 +43,6 @@ const PlanetBackgroundObject = ({ meshProps, seed }: PlanetBaseProps) => {
     }
 
     const uniforms = materialRef.current.uniforms;
-
-    uniforms.time = uniforms.time || { value: 0 };
 
     uniforms.time.value += DEFAULT_TIME_VALUE_UPDATE;
   });

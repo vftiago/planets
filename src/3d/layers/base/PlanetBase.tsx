@@ -40,7 +40,7 @@ const PlanetBaseObject = ({ meshProps, seed, colors, rotation = Math.random() }:
     };
 
     materialRef.current.uniforms = uniforms;
-  }, [colorPalette, seed]);
+  }, [colorPalette, seed, rotation]);
 
   useFrame(() => {
     if (!materialRef.current) {
@@ -48,8 +48,6 @@ const PlanetBaseObject = ({ meshProps, seed, colors, rotation = Math.random() }:
     }
 
     const uniforms = materialRef.current.uniforms;
-
-    uniforms.time = uniforms.time || { value: 0 };
 
     uniforms.time.value += DEFAULT_TIME_VALUE_UPDATE;
   });

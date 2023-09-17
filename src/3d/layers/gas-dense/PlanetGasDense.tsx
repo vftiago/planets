@@ -1,38 +1,47 @@
-import React, { useLayoutEffect, useMemo } from "react";
+import { useLayoutEffect } from "react";
 
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import * as THREE from "three";
 
-import fragmentShader from "./planet-land.frag";
-import vertexShader from "./planet-land.vert";
-import { BASE_LAND_COLORS } from "../../colors";
+import fragmentShader from "./planet-gas-dense.frag";
+import vertexShader from "./planet-gas-dense.vert";
 import { DEFAULT_TIME_VALUE_UPDATE } from "../../constants";
+import { useTexture } from "@react-three/drei";
+import palette1 from "./gas_giant_colors.png";
+import palette2 from "./gas_giant_dark_colors.png";
 
-type PlanetBaseProps = {
+type PlanetGasDenseProps = {
   meshProps?: JSX.IntrinsicElements["mesh"];
   seed: number;
-  colors?: THREE.Vector4[];
+  pixels?: number;
   lightPos?: THREE.Vector2;
-  lightIntensity?: number;
   rotationSpeed?: number;
+  ringWidth?: number;
+  ringPerspective?: number;
+  scalePlanet?: number;
   rotation?: number;
-  land?: number;
 };
 
-const PlanetLandObject = ({
+const PlanetGasDense = ({
   meshProps,
-  lightPos = new THREE.Vector2(0.39, 0.7),
-  lightIntensity = 0.1,
-  colors,
   seed,
+  pixels = 100.0,
+  lightPos = new THREE.Vector2(0.39, 0.7),
   rotationSpeed = 0.1,
   rotation = Math.random(),
-  land = 0.5,
-}: PlanetBaseProps) => {
+}: PlanetGasDenseProps) => {
   const materialRef = useRef<THREE.ShaderMaterial>(null);
 
-  const colorPalette = useMemo(() => (colors ? colors : BASE_LAND_COLORS), [colors]);
+  const { colorSchemeTexture } = useTexture({ colorSchemeTexture: palette1 });
+
+  colorSchemeTexture.magFilter = THREE.NearestFilter;
+  colorSchemeTexture.minFilter = THREE.NearestFilter;
+
+  const { darkColorSchemeTexture } = useTexture({ darkColorSchemeTexture: palette2 });
+
+  darkColorSchemeTexture.magFilter = THREE.NearestFilter;
+  darkColorSchemeTexture.minFilter = THREE.NearestFilter;
 
   useLayoutEffect(() => {
     if (!materialRef.current) {
@@ -40,13 +49,9 @@ const PlanetLandObject = ({
     }
 
     const uniforms = {
-      pixels: { value: 100.0 },
-      land_cutoff: { value: land },
-      col1: { value: colorPalette[0] },
-      col2: { value: colorPalette[1] },
-      col3: { value: colorPalette[2] },
-      col4: { value: colorPalette[3] },
-      lightIntensity: { value: lightIntensity },
+      colorscheme: { value: colorSchemeTexture },
+      dark_colorscheme: { value: darkColorSchemeTexture },
+      pixels: { value: pixels },
       light_origin: { value: lightPos },
       time_speed: { value: rotationSpeed },
       rotation: { value: rotation },
@@ -55,7 +60,7 @@ const PlanetLandObject = ({
     };
 
     materialRef.current.uniforms = uniforms;
-  }, [colorPalette, land, lightIntensity, lightPos, seed, rotation, rotationSpeed]);
+  }, [seed, lightPos, rotation, rotationSpeed, colorSchemeTexture, darkColorSchemeTexture, pixels]);
 
   useFrame(() => {
     if (!materialRef.current) {
@@ -80,4 +85,4 @@ const PlanetLandObject = ({
   );
 };
 
-export default PlanetLandObject;
+export default PlanetGasDense;

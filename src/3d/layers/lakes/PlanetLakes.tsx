@@ -1,38 +1,45 @@
-import React, { useLayoutEffect, useMemo } from "react";
+import { useLayoutEffect, useMemo } from "react";
 
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import * as THREE from "three";
 
-import fragmentShader from "./planet-land.frag";
-import vertexShader from "./planet-land.vert";
-import { BASE_LAND_COLORS } from "../../colors";
+import fragmentShader from "./planet-lakes.frag";
+import vertexShader from "./planet-lakes.vert";
 import { DEFAULT_TIME_VALUE_UPDATE } from "../../constants";
 
-type PlanetBaseProps = {
+type PlanetRiversProps = {
   meshProps?: JSX.IntrinsicElements["mesh"];
-  seed: number;
-  colors?: THREE.Vector4[];
+  lakes?: number;
   lightPos?: THREE.Vector2;
-  lightIntensity?: number;
   rotationSpeed?: number;
+  rivers?: number;
+  colors?: THREE.Vector4[];
   rotation?: number;
-  land?: number;
+  seed: number;
+  pixels?: number;
 };
 
-const PlanetLandObject = ({
+const BASE_LAKE_COLORS = [
+  new THREE.Vector4(79 / 255, 164 / 255, 184 / 255, 1),
+  new THREE.Vector4(76 / 255, 104 / 255, 133 / 255, 1),
+  new THREE.Vector4(58 / 255, 63 / 255, 94 / 255, 1),
+];
+
+const PlanetLakesObject = ({
   meshProps,
+  lakes = 0.6,
   lightPos = new THREE.Vector2(0.39, 0.7),
-  lightIntensity = 0.1,
-  colors,
-  seed,
   rotationSpeed = 0.1,
+  rivers = 0.6,
+  colors,
   rotation = Math.random(),
-  land = 0.5,
-}: PlanetBaseProps) => {
+  seed,
+  pixels = 100.0,
+}: PlanetRiversProps) => {
   const materialRef = useRef<THREE.ShaderMaterial>(null);
 
-  const colorPalette = useMemo(() => (colors ? colors : BASE_LAND_COLORS), [colors]);
+  const colorPalette = useMemo(() => (colors ? colors : BASE_LAKE_COLORS), [colors]);
 
   useLayoutEffect(() => {
     if (!materialRef.current) {
@@ -40,22 +47,21 @@ const PlanetLandObject = ({
     }
 
     const uniforms = {
-      pixels: { value: 100.0 },
-      land_cutoff: { value: land },
-      col1: { value: colorPalette[0] },
-      col2: { value: colorPalette[1] },
-      col3: { value: colorPalette[2] },
-      col4: { value: colorPalette[3] },
-      lightIntensity: { value: lightIntensity },
+      pixels: { value: pixels },
       light_origin: { value: lightPos },
-      time_speed: { value: rotationSpeed },
-      rotation: { value: rotation },
       seed: { value: seed },
+      time_speed: { value: rotationSpeed },
+      lake_cutoff: { value: lakes },
+      river_cutoff: { value: rivers },
+      rotation: { value: rotation },
+      color1: { value: colorPalette[0] },
+      color2: { value: colorPalette[1] },
+      color3: { value: colorPalette[2] },
       time: { value: 0.0 },
     };
 
     materialRef.current.uniforms = uniforms;
-  }, [colorPalette, land, lightIntensity, lightPos, seed, rotation, rotationSpeed]);
+  }, [colorPalette, lightPos, seed, rotation, rivers, rotationSpeed, lakes, pixels]);
 
   useFrame(() => {
     if (!materialRef.current) {
@@ -80,4 +86,4 @@ const PlanetLandObject = ({
   );
 };
 
-export default PlanetLandObject;
+export default PlanetLakesObject;

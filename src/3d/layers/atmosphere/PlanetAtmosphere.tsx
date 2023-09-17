@@ -28,6 +28,7 @@ const PlanetAtmosphereObject = ({ meshProps, colors }: PlanetBaseProps) => {
       color1: { value: colorPalette[0] },
       color2: { value: colorPalette[1] },
       color3: { value: colorPalette[2] },
+      time: { value: 0.0 },
     };
 
     materialRef.current.uniforms = uniforms;
@@ -39,8 +40,6 @@ const PlanetAtmosphereObject = ({ meshProps, colors }: PlanetBaseProps) => {
     }
 
     const uniforms = materialRef.current.uniforms;
-
-    uniforms.time = uniforms.time || { value: 0 };
 
     uniforms.time.value += DEFAULT_TIME_VALUE_UPDATE;
   });
