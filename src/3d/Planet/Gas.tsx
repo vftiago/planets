@@ -1,7 +1,7 @@
 import * as THREE from "three";
 
 import { PerspectiveCamera } from "@react-three/drei";
-import PlanetGasBaseObject from "../layers/gas-base/PlanetGasBase";
+import { GAS_COLORS } from "../colors";
 import PlanetGasObject from "../layers/gas/PlanetGas";
 
 type PlanetObjectProps = {
@@ -12,8 +12,8 @@ type PlanetObjectProps = {
 const Gas = (planetObjectProps: PlanetObjectProps) => {
   return (
     <group>
-      <PlanetGasBaseObject {...planetObjectProps} />
       <PlanetGasObject {...planetObjectProps} />
+      <PlanetGasObject cloudCover={0.538} cloudCurve={1.3} colors={GAS_COLORS} {...planetObjectProps} />
       <PerspectiveCamera makeDefault fov={90} position={[0, 0, 0.6]} />
     </group>
   );

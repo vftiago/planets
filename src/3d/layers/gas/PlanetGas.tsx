@@ -6,7 +6,7 @@ import * as THREE from "three";
 
 import fragmentShader from "./planet-gas.frag";
 import vertexShader from "./planet-gas.vert";
-import { GAS_COLORS } from "../../colors";
+import { GAS_BASE_COLORS } from "../../colors";
 import { DEFAULT_TIME_VALUE_UPDATE } from "../../constants";
 
 type PlanetGasProps = {
@@ -25,8 +25,8 @@ type PlanetGasProps = {
 
 const PlanetGasObject = ({
   meshProps,
-  cloudCover = 0.538,
-  cloudCurve = 1.3,
+  cloudCover = 0.0,
+  cloudCurve = 0.0,
   seed,
   colors,
   rotation = 80.0,
@@ -36,7 +36,7 @@ const PlanetGasObject = ({
 }: PlanetGasProps) => {
   const materialRef = useRef<THREE.ShaderMaterial>(null);
 
-  const colorPalette = useMemo(() => (colors ? colors : GAS_COLORS), [colors]);
+  const colorPalette = useMemo(() => (colors ? colors : GAS_BASE_COLORS), [colors]);
 
   useLayoutEffect(() => {
     if (!materialRef.current) {
