@@ -10,8 +10,6 @@ type PlanetObjectProps = {
 };
 
 const AridColors = (planetObjectProps: PlanetObjectProps) => {
-  console.log(RANDOM_COLORS);
-
   return (
     <group>
       <PlanetAridColorsObject colors={RANDOM_COLORS} {...planetObjectProps} />
