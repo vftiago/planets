@@ -16,8 +16,10 @@ export const generateNewColorScheme = (
     Math.random() * (3.0 - 1.0) + 1.0
   );
 
-  const cols: THREE.Vector4[] = [];
+  const colors: THREE.Vector4[] = [];
+
   let n = colorCount - 1;
+
   n = Math.max(1, n);
 
   for (let i = 0; i < colorCount; i++) {
@@ -28,10 +30,10 @@ export const generateNewColorScheme = (
     vec3.y = a.y + b.y * Math.cos(6.28318 * (c.y * t + d.y));
     vec3.z = a.z + b.z * Math.cos(6.28318 * (c.z * t + d.z));
 
-    cols.push(new THREE.Vector4(vec3.x, vec3.y, vec3.z, 1));
+    colors.push(new THREE.Vector4(vec3.x, vec3.y, vec3.z, 1));
   }
 
-  return cols;
+  return colors;
 };
 
 export const randomizeColors = (): THREE.Vector4[] => {
@@ -39,19 +41,20 @@ export const randomizeColors = (): THREE.Vector4[] => {
   const hueDiff = THREE.MathUtils.randFloat(0.3, 0.65);
   const saturation = 1.0;
   const seedColors = generateNewColorScheme(colorCount, hueDiff, saturation);
-  const cols: THREE.Vector4[] = [];
+  const colors: THREE.Vector4[] = [];
 
   for (let i = 0; i < 5; i++) {
     const baseColor = seedColors[i];
-    const newCol = new THREE.Vector4(
+
+    const newColor = new THREE.Vector4(
       Math.max(0, baseColor.x - i / 5.0),
       Math.max(0, baseColor.y - i / 5.0),
       Math.max(0, baseColor.z - i / 5.0),
       1
-    );
+    ).lerp(baseColor, (1.0 - i / 5.0) * 0.2);
 
-    cols.push(newCol);
+    colors.push(newColor);
   }
 
-  return cols;
+  return colors;
 };

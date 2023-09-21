@@ -91,7 +91,7 @@ void main() {
         d_light *= 0.9;
     }
     
-    float c = d_light*pow(f,0.5)*8.0; // change the magic nums here for different light strengths
+    float c = d_light*pow(f,0.4)*8.0; // change the magic nums here for different light strengths
     
     // apply dithering
     if (dith || !should_dither) {
@@ -100,7 +100,7 @@ void main() {
     }
     
     // now we can assign colors based on distance to light origin
-    float posterize = floor(c * 4.0) / 4.0;
+    float posterize = floor(c*4.0)/4.0;
 
     // Use the array of colors directly
     int index = int(posterize);

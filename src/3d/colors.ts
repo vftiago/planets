@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { generateNewColorScheme } from "./utils";
+import { randomizeColors } from "./utils";
 
 export const BASE_COLORS = [
   new THREE.Vector4(155 / 255, 158 / 255, 184 / 255, 1),
@@ -21,7 +21,7 @@ export const GAS_COLORS = [
   new THREE.Vector4(0.129412, 0.0941176, 0.105882, 1),
 ];
 
-export const RANDOM_COLORS = generateNewColorScheme(5);
+export const RANDOM_COLORS = randomizeColors();
 
 export const BASE_LAVA_COLORS = [
   new THREE.Vector4(0.560784, 0.301961, 0.341176, 1),
