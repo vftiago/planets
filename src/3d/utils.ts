@@ -1,57 +1,55 @@
 import * as THREE from "three";
 
-export const generateNewColorScheme = (
+export const generateSeedColors = (
   colorCount: number,
   hueDiff: number = 0.9,
   saturation: number = 0.5
-): THREE.Vector4[] => {
+): THREE.Color[] => {
   const a = new THREE.Vector3(0.5, 0.5, 0.5);
   const b = new THREE.Vector3(0.5, 0.5, 0.5).multiplyScalar(saturation);
   const c = new THREE.Vector3(
-    Math.random() * (1.5 - 0.5) + 0.5,
-    Math.random() * (1.5 - 0.5) + 0.5,
-    Math.random() * (1.5 - 0.5) + 0.5
-  ).multiplyScalar(hueDiff);
-  const d = new THREE.Vector3(Math.random() * 1.0, Math.random() * 1.0, Math.random() * 1.0).multiplyScalar(
-    Math.random() * (3.0 - 1.0) + 1.0
+    THREE.MathUtils.randFloat(0.5, 1.5) * hueDiff,
+    THREE.MathUtils.randFloat(0.5, 1.5) * hueDiff,
+    THREE.MathUtils.randFloat(0.5, 1.5) * hueDiff
   );
+  const d = new THREE.Vector3(
+    THREE.MathUtils.randFloat(0, 1),
+    THREE.MathUtils.randFloat(0, 1),
+    THREE.MathUtils.randFloat(0, 1)
+  ).multiplyScalar(THREE.MathUtils.randFloat(1, 3));
 
-  const colors: THREE.Vector4[] = [];
+  const colors: THREE.Color[] = [];
 
-  let n = colorCount - 1;
-
-  n = Math.max(1, n);
+  const n = Math.max(1, colorCount - 1);
 
   for (let i = 0; i < colorCount; i++) {
     const vec3 = new THREE.Vector3();
+
     const t = i / n;
 
     vec3.x = a.x + b.x * Math.cos(6.28318 * (c.x * t + d.x));
     vec3.y = a.y + b.y * Math.cos(6.28318 * (c.y * t + d.y));
     vec3.z = a.z + b.z * Math.cos(6.28318 * (c.z * t + d.z));
 
-    colors.push(new THREE.Vector4(vec3.x, vec3.y, vec3.z, 1));
+    colors.push(new THREE.Color(vec3.x, vec3.y, vec3.z));
   }
 
   return colors;
 };
 
-export const randomizeColors = (): THREE.Vector4[] => {
+export const randomizeColors = (): THREE.Color[] => {
   const colorCount = 5 + Math.floor(Math.random() * 3);
   const hueDiff = THREE.MathUtils.randFloat(0.3, 0.65);
   const saturation = 1.0;
-  const seedColors = generateNewColorScheme(colorCount, hueDiff, saturation);
-  const colors: THREE.Vector4[] = [];
+
+  const seedColors = generateSeedColors(colorCount, hueDiff, saturation);
+  const colors: THREE.Color[] = [];
 
   for (let i = 0; i < 5; i++) {
-    const baseColor = seedColors[i];
-
-    const newColor = new THREE.Vector4(
-      Math.max(0, baseColor.x - i / 5.0),
-      Math.max(0, baseColor.y - i / 5.0),
-      Math.max(0, baseColor.z - i / 5.0),
-      1
-    ).lerp(baseColor, (1.0 - i / 5.0) * 0.2);
+    const newColor = seedColors[i]
+      .clone()
+      .offsetHSL(0, 0, -(i / 5.0))
+      .offsetHSL(0, 0, (1.0 - i / 5.0) * 0.2);
 
     colors.push(newColor);
   }

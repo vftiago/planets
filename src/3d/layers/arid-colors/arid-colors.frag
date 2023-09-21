@@ -6,7 +6,7 @@ float light_distance1 = 0.362;
 float light_distance2 = 0.525;
 uniform float time_speed;
 float dither_size = 2.0;
-uniform vec4 colors[5];
+uniform vec3 colors[5];
 float size = 10.0;
 int OCTAVES = 4;
 uniform float seed;
@@ -91,7 +91,7 @@ void main() {
         d_light *= 0.9;
     }
     
-    float c = d_light*pow(f,0.4)*8.0; // change the magic nums here for different light strengths
+    float c = d_light*pow(f,0.8)*8.0; // change the magic nums here for different light strengths
     
     // apply dithering
     if (dith || !should_dither) {
@@ -104,7 +104,7 @@ void main() {
 
     // Use the array of colors directly
     int index = int(posterize);
-    vec4 col = colors[index];
+    vec4 col = vec4(colors[index], 1.0);
     
     gl_FragColor = vec4(col.rgb, a * col.a);
 }

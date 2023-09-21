@@ -4,6 +4,7 @@ import { PlanetType } from "../../domains/planets/planet";
 import Lava from "./Lava";
 import Ice from "./Ice";
 import AridTexture from "./AridTexture";
+import AridColors from "./AridColors";
 import Gas from "./Gas";
 import GasRing from "./GasRing";
 
@@ -21,7 +22,7 @@ const Planet = ({ seed, type }: PlanetObjectProps) => {
     case PlanetType.Ice:
       return <Ice seed={seed} />;
     case PlanetType.Arid:
-      return <AridTexture seed={seed} />;
+      return <AridColors seed={seed} />;
     case PlanetType.Gas:
       return <Gas seed={seed} />;
     case PlanetType.GasRing:
