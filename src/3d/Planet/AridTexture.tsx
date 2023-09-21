@@ -1,6 +1,6 @@
 import * as THREE from "three";
 
-import PlanetDustObject from "../layers/dust/PlanetDust";
+import PlanetAridTextureObject from "../layers/arid-texture/PlanetAridTexture";
 import { PerspectiveCamera } from "@react-three/drei";
 
 type PlanetObjectProps = {
@@ -8,13 +8,13 @@ type PlanetObjectProps = {
   colors?: THREE.Vector4[];
 };
 
-const Arid = (planetObjectProps: PlanetObjectProps) => {
+const AridTexture = (planetObjectProps: PlanetObjectProps) => {
   return (
     <group>
-      <PlanetDustObject {...planetObjectProps} />
+      <PlanetAridTextureObject {...planetObjectProps} />
       <PerspectiveCamera makeDefault fov={90} position={[0, 0, 0.6]} />
     </group>
   );
 };
 
-export default Arid;
+export default AridTexture;

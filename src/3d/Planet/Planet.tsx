@@ -3,7 +3,7 @@ import NoAtmosphere from "./NoAtmosphere";
 import { PlanetType } from "../../domains/planets/planet";
 import Lava from "./Lava";
 import Ice from "./Ice";
-import Arid from "./Arid";
+import AridTexture from "./AridTexture";
 import Gas from "./Gas";
 import GasRing from "./GasRing";
 
@@ -21,7 +21,7 @@ const Planet = ({ seed, type }: PlanetObjectProps) => {
     case PlanetType.Ice:
       return <Ice seed={seed} />;
     case PlanetType.Arid:
-      return <Arid seed={seed} />;
+      return <AridTexture seed={seed} />;
     case PlanetType.Gas:
       return <Gas seed={seed} />;
     case PlanetType.GasRing:

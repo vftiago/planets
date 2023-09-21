@@ -4,8 +4,8 @@ import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import * as THREE from "three";
 
-import fragmentShader from "./planet-dust.frag";
-import vertexShader from "./planet-dust.vert";
+import fragmentShader from "./arid-texture.frag";
+import vertexShader from "./arid-texture.vert";
 import { DEFAULT_TIME_VALUE_UPDATE } from "../../constants";
 import palette from "./dry_terran.png";
 import { useTexture } from "@react-three/drei";
@@ -20,7 +20,7 @@ type PlanetRiversProps = {
   pixels?: number;
 };
 
-const PlanetDustObject = ({
+const PlanetAridTextureObject = ({
   meshProps,
   lightPos = new THREE.Vector2(0.39, 0.7),
   rotationSpeed = 0.1,
@@ -76,4 +76,4 @@ const PlanetDustObject = ({
   );
 };
 
-export default PlanetDustObject;
+export default PlanetAridTextureObject;
