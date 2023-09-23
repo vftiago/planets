@@ -6,7 +6,7 @@ import PlanetGasObject from "../layers/gas/PlanetGas";
 
 type PlanetObjectProps = {
   seed: number;
-  colors?: THREE.Vector4[];
+  colors?: THREE.Color[];
 };
 
 const Gas = (planetObjectProps: PlanetObjectProps) => {

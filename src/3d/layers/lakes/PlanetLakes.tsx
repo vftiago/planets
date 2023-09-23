@@ -14,7 +14,7 @@ type PlanetRiversProps = {
   lightPos?: THREE.Vector2;
   rotationSpeed?: number;
   rivers?: number;
-  colors?: THREE.Vector4[];
+  colors?: THREE.Color[];
   rotation?: number;
   seed: number;
   pixels?: number;

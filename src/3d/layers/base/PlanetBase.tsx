@@ -12,7 +12,7 @@ import { DEFAULT_TIME_VALUE_UPDATE } from "../../constants";
 type PlanetBaseProps = {
   meshProps?: JSX.IntrinsicElements["mesh"];
   seed: number;
-  colors?: THREE.Vector4[];
+  colors?: THREE.Color[];
   rotation?: number;
 };
 

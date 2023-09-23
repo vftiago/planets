@@ -6,7 +6,7 @@ import PlanetRingObject from "../layers/ring/PlanetRing";
 
 type PlanetObjectProps = {
   seed: number;
-  colors?: THREE.Vector4[];
+  colors?: THREE.Color[];
 };
 
 const GasRing = (planetObjectProps: PlanetObjectProps) => {

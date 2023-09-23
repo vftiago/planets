@@ -14,7 +14,7 @@ type PlanetRiversProps = {
   meshProps?: JSX.IntrinsicElements["mesh"];
   lightPos?: THREE.Vector2;
   rotationSpeed?: number;
-  colors?: THREE.Vector4[];
+  colors?: THREE.Color[];
   rotation?: number;
   seed: number;
   pixels?: number;

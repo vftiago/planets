@@ -6,7 +6,7 @@ import PlanetCraterObject from "../layers/crater/PlanetCrater";
 
 type PlanetObjectProps = {
   seed: number;
-  colors?: THREE.Vector4[];
+  colors?: THREE.Color[];
 };
 
 const NoAtmosphere = (planetObjectProps: PlanetObjectProps) => {

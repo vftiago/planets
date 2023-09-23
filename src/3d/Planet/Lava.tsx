@@ -8,7 +8,7 @@ import { BASE_LAVA_COLORS, BASE_LAVA_CRATER_COLORS, BASE_LAVA_RIVER_COLORS } fro
 
 type PlanetObjectProps = {
   seed: number;
-  colors?: THREE.Vector4[];
+  colors?: THREE.Color[];
 };
 
 const Lava = (planetObjectProps: PlanetObjectProps) => {

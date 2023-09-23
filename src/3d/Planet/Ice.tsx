@@ -7,7 +7,7 @@ import PlanetLakesObject from "../layers/lakes/PlanetLakes";
 
 type PlanetObjectProps = {
   seed: number;
-  colors?: THREE.Vector4[];
+  colors?: THREE.Color[];
 };
 
 const BASE_ICE_COLORS = [

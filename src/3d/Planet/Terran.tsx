@@ -10,7 +10,7 @@ import { PerspectiveCamera } from "@react-three/drei";
 
 type PlanetObjectProps = {
   seed: number;
-  colors?: THREE.Vector4[];
+  colors?: THREE.Color[];
 };
 
 const Terran = (planetObjectProps: PlanetObjectProps) => {

@@ -11,7 +11,7 @@ import { DEFAULT_TIME_VALUE_UPDATE } from "../../constants";
 
 type PlanetBaseProps = {
   meshProps?: JSX.IntrinsicElements["mesh"];
-  colors?: THREE.Vector4[];
+  colors?: THREE.Color[];
 };
 
 const PlanetAtmosphereObject = ({ meshProps, colors }: PlanetBaseProps) => {
