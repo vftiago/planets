@@ -25,9 +25,9 @@ const PlanetAtmosphereObject = ({ meshProps, colors }: PlanetBaseProps) => {
     }
 
     const uniforms = {
-      color1: { value: colorPalette[0] },
-      color2: { value: colorPalette[1] },
-      color3: { value: colorPalette[2] },
+      color1: { value: new THREE.Vector4(...colorPalette[0], 0.25) },
+      color2: { value: new THREE.Vector4(...colorPalette[1], 0.35) },
+      color3: { value: new THREE.Vector4(...colorPalette[2], 0.45) },
       time: { value: 0.0 },
     };
 

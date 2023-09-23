@@ -54,9 +54,9 @@ const PlanetLakesObject = ({
       lake_cutoff: { value: lakes },
       river_cutoff: { value: rivers },
       rotation: { value: rotation },
-      color1: { value: colorPalette[0] },
-      color2: { value: colorPalette[1] },
-      color3: { value: colorPalette[2] },
+      color1: { value: new THREE.Vector4(...colorPalette[0], 1) },
+      color2: { value: new THREE.Vector4(...colorPalette[1], 1) },
+      color3: { value: new THREE.Vector4(...colorPalette[2], 1) },
       time: { value: 0.0 },
     };
 

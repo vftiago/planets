@@ -44,10 +44,10 @@ const PlanetGasObject = ({
     }
 
     const uniforms = {
-      base_color: { value: colorPalette[0] },
-      outline_color: { value: colorPalette[1] },
-      shadow_base_color: { value: colorPalette[2] },
-      shadow_outline_color: { value: colorPalette[3] },
+      base_color: { value: new THREE.Vector4(...colorPalette[0], 1) },
+      outline_color: { value: new THREE.Vector4(...colorPalette[1], 1) },
+      shadow_base_color: { value: new THREE.Vector4(...colorPalette[2], 1) },
+      shadow_outline_color: { value: new THREE.Vector4(...colorPalette[3], 1) },
       cloud_cover: { value: cloudCover },
       stretch: { value: stretch },
       cloud_curve: { value: cloudCurve },

@@ -28,9 +28,9 @@ const PlanetBaseObject = ({ meshProps, seed, colors, rotation = Math.random() }:
 
     const uniforms = {
       pixels: { value: 100.0 },
-      color1: { value: colorPalette[0] },
-      color2: { value: colorPalette[1] },
-      color3: { value: colorPalette[2] },
+      color1: { value: new THREE.Vector4(...colorPalette[0], 1) },
+      color2: { value: new THREE.Vector4(...colorPalette[1], 1) },
+      color3: { value: new THREE.Vector4(...colorPalette[2], 1) },
       lightIntensity: { value: 0.1 },
       light_origin: { value: new THREE.Vector2(0.39, 0.7) },
       time_speed: { value: 0.1 },

@@ -36,8 +36,8 @@ const PlanetCraterObject = ({
     }
 
     const uniforms = {
-      color1: { value: colorPalette[0] },
-      color2: { value: colorPalette[1] },
+      color1: { value: new THREE.Vector4(...colorPalette[0], 1) },
+      color2: { value: new THREE.Vector4(...colorPalette[1], 1) },
       light_origin: { value: lightPos },
       time_speed: { value: rotationSpeed },
       rotation: { value: rotation },
