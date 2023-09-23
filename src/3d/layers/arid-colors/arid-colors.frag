@@ -91,20 +91,29 @@ void main() {
         d_light *= 0.9;
     }
     
-    float c = d_light*pow(f,0.8)*8.0; // change the magic nums here for different light strengths
+    float c = d_light*pow(f,0.8)*3.5; // change the magic nums here for different light strengths
     
     // apply dithering
     if (dith || !should_dither) {
         c += 0.02;
         c *= 1.05;
     }
-    
+  
     // now we can assign colors based on distance to light origin
-    float posterize = floor(c*4.0)/4.0;
+    float posterize = floor(c * 4.0) / 4.0;
+    vec3 finalColor;
 
-    // Use the array of colors directly
-    int index = int(posterize);
-    vec4 col = vec4(colors[index], 1.0);
-    
-    gl_FragColor = vec4(col.rgb, a * col.a);
+    if (posterize < 0.25) {
+        finalColor = colors[0];
+    } else if (posterize < 0.5) {
+        finalColor = colors[1];
+    } else if (posterize < 0.75) {
+        finalColor = colors[2];
+    } else if (posterize < 1.0) {
+        finalColor = colors[3];
+    } else {
+        finalColor = colors[4];
+    }
+
+    gl_FragColor = vec4(finalColor, a);
 }
