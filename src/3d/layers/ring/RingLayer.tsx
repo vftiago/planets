@@ -32,7 +32,7 @@ const RingLayer = ({
   ringWidth = 0.143,
   ringPerspective = 6.0,
   scalePlanet = 4.0,
-  rotation = Math.random(),
+  rotation,
 }: RingLayerProps) => {
   const materialRef = useRef<THREE.ShaderMaterial>(null);
 

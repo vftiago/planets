@@ -25,7 +25,7 @@ const RiverLayer = ({
   rotationSpeed = 0.1,
   rivers = 0.6,
   colors,
-  rotation = Math.random(),
+  rotation,
   seed,
 }: RiverLayerProps) => {
   const materialRef = useRef<THREE.ShaderMaterial>(null);

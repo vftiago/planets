@@ -28,7 +28,7 @@ const CloudLayer = ({
   seed,
   lightPos = new THREE.Vector2(0.39, 0.7),
   rotationSpeed = 0.1,
-  rotation = Math.random(),
+  rotation,
   cloudCover = 0.546,
   stretch = 2.5,
 }: CloudLayerProps) => {

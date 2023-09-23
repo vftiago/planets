@@ -33,7 +33,7 @@ const LakeLayer = ({
   rotationSpeed = 0.1,
   rivers = 0.6,
   colors,
-  rotation = Math.random(),
+  rotation,
   seed,
   pixels = 100.0,
 }: LakeLayerProps) => {

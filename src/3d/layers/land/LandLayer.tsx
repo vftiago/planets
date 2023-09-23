@@ -27,7 +27,7 @@ const LandLayer = ({
   colors,
   seed,
   rotationSpeed = 0.1,
-  rotation = Math.random(),
+  rotation,
   land = 0.5,
 }: LandLayerProps) => {
   const materialRef = useRef<THREE.ShaderMaterial>(null);

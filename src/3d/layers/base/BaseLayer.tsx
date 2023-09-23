@@ -16,7 +16,7 @@ type BaseLayerProps = {
   rotation?: number;
 };
 
-const BaseLayer = ({ meshProps, seed, colors, rotation = Math.random() }: BaseLayerProps) => {
+const BaseLayer = ({ meshProps, seed, colors, rotation }: BaseLayerProps) => {
   const materialRef = useRef<THREE.ShaderMaterial>(null);
 
   const colorPalette = useMemo(() => (colors ? colors : BASE_COLORS), [colors]);

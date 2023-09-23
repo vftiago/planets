@@ -29,7 +29,7 @@ const GasDenseLayer = ({
   pixels = 100.0,
   lightPos = new THREE.Vector2(0.39, 0.7),
   rotationSpeed = 0.1,
-  rotation = Math.random(),
+  rotation,
 }: GasDenseLayerProps) => {
   const materialRef = useRef<THREE.ShaderMaterial>(null);
 
