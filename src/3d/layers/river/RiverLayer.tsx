@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useMemo } from "react";
+import { useLayoutEffect, useMemo } from "react";
 
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";

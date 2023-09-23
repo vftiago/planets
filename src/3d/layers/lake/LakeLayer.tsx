@@ -4,8 +4,8 @@ import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import * as THREE from "three";
 
-import fragmentShader from "./lakes.frag";
-import vertexShader from "./lakes.vert";
+import fragmentShader from "./lake.frag";
+import vertexShader from "./lake.vert";
 import { DEFAULT_TIME_VALUE_UPDATE } from "../../constants";
 
 type LakeLayerProps = {
