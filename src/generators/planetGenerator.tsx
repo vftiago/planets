@@ -32,6 +32,7 @@ export const useGeneratePlanet = (quantity = 8): Planet[] => {
       rarity,
       biomes,
       type,
+      rotation: Math.random() * 2 - 1,
       quality: Math.round(quality),
     };
 

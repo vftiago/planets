@@ -1,20 +1,20 @@
-import React, { useLayoutEffect, useMemo } from "react";
+import { useLayoutEffect, useMemo } from "react";
 
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import * as THREE from "three";
 
-import fragmentShader from "./planet-atmosphere.frag";
-import vertexShader from "./planet-atmosphere.vert";
+import fragmentShader from "./atmosphere.frag";
+import vertexShader from "./atmosphere.vert";
 import { BASE_ATMOSPHERE_COLORS } from "../../colors";
 import { DEFAULT_TIME_VALUE_UPDATE } from "../../constants";
 
-type PlanetBaseProps = {
+type AtmosphereLayerProps = {
   meshProps?: JSX.IntrinsicElements["mesh"];
   colors?: THREE.Color[];
 };
 
-const PlanetAtmosphereObject = ({ meshProps, colors }: PlanetBaseProps) => {
+const AtmosphereLayer = ({ meshProps, colors }: AtmosphereLayerProps) => {
   const materialRef = useRef<THREE.ShaderMaterial>(null);
 
   const colorPalette = useMemo(() => (colors ? colors : BASE_ATMOSPHERE_COLORS), [colors]);
@@ -57,4 +57,4 @@ const PlanetAtmosphereObject = ({ meshProps, colors }: PlanetBaseProps) => {
   );
 };
 
-export default PlanetAtmosphereObject;
+export default AtmosphereLayer;

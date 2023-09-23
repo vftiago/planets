@@ -4,12 +4,12 @@ import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import * as THREE from "three";
 
-import fragmentShader from "./planet-gas.frag";
-import vertexShader from "./planet-gas.vert";
+import fragmentShader from "./gas.frag";
+import vertexShader from "./gas.vert";
 import { GAS_BASE_COLORS } from "../../colors";
 import { DEFAULT_TIME_VALUE_UPDATE } from "../../constants";
 
-type PlanetGasProps = {
+type GasLayerProps = {
   meshProps?: JSX.IntrinsicElements["mesh"];
   seed: number;
   colors?: THREE.Color[];
@@ -23,7 +23,7 @@ type PlanetGasProps = {
   stretch?: number;
 };
 
-const PlanetGasObject = ({
+const GasLayer = ({
   meshProps,
   cloudCover = 0.0,
   cloudCurve = 0.0,
@@ -33,7 +33,7 @@ const PlanetGasObject = ({
   stretch = 1.0,
   rotationSpeed = 0.1,
   lightPos = new THREE.Vector2(0.39, 0.7),
-}: PlanetGasProps) => {
+}: GasLayerProps) => {
   const materialRef = useRef<THREE.ShaderMaterial>(null);
 
   const colorPalette = useMemo(() => (colors ? colors : GAS_BASE_COLORS), [colors]);
@@ -84,4 +84,4 @@ const PlanetGasObject = ({
   );
 };
 
-export default PlanetGasObject;
+export default GasLayer;

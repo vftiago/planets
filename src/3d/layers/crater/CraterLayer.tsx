@@ -1,40 +1,34 @@
-import React, { useLayoutEffect, useMemo } from "react";
+import { useLayoutEffect, useMemo } from "react";
 
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import * as THREE from "three";
 
-import fragmentShader from "./cloud-base.frag";
-import vertexShader from "./cloud-base.vert";
-import { BASE_CLOUD_COLORS } from "../../colors";
+import fragmentShader from "./crater.frag";
+import vertexShader from "./crater.vert";
+import { BASE_CRATER_COLORS } from "../../colors";
 import { DEFAULT_TIME_VALUE_UPDATE } from "../../constants";
 
-type PlanetBaseProps = {
+type CraterLayerProps = {
   meshProps?: JSX.IntrinsicElements["mesh"];
   seed: number;
   colors?: THREE.Color[];
   lightPos?: THREE.Vector2;
-  lightIntensity?: number;
   rotationSpeed?: number;
   rotation?: number;
-  land?: number;
-  cloudCover?: number;
-  stretch?: number;
 };
 
-const PlanetCloudObject = ({
+const CraterLayer = ({
   meshProps,
   colors,
-  seed,
   lightPos = new THREE.Vector2(0.39, 0.7),
   rotationSpeed = 0.1,
   rotation = Math.random(),
-  cloudCover = 0.546,
-  stretch = 2.5,
-}: PlanetBaseProps) => {
+  seed,
+}: CraterLayerProps) => {
   const materialRef = useRef<THREE.ShaderMaterial>(null);
 
-  const colorPalette = useMemo(() => (colors ? colors : BASE_CLOUD_COLORS), [colors]);
+  const colorPalette = useMemo(() => (colors ? colors : BASE_CRATER_COLORS), [colors]);
 
   useLayoutEffect(() => {
     if (!materialRef.current) {
@@ -42,22 +36,17 @@ const PlanetCloudObject = ({
     }
 
     const uniforms = {
+      color1: { value: new THREE.Vector4(...colorPalette[0], 1) },
+      color2: { value: new THREE.Vector4(...colorPalette[1], 1) },
       light_origin: { value: lightPos },
-      pixels: { value: 100.0 },
-      seed: { value: seed },
       time_speed: { value: rotationSpeed },
-      base_color: { value: new THREE.Vector4(...colorPalette[0], 1) },
-      outline_color: { value: new THREE.Vector4(...colorPalette[1], 1) },
-      shadow_base_color: { value: new THREE.Vector4(...colorPalette[2], 1) },
-      shadow_outline_color: { value: new THREE.Vector4(...colorPalette[3], 1) },
-      cloud_cover: { value: cloudCover },
       rotation: { value: rotation },
-      stretch: { value: stretch },
+      seed: { value: seed },
       time: { value: 0.0 },
     };
 
     materialRef.current.uniforms = uniforms;
-  }, [colorPalette, cloudCover, lightPos, seed, rotation, rotationSpeed, stretch]);
+  }, [colorPalette, lightPos, rotationSpeed, rotation, seed]);
 
   useFrame(() => {
     if (!materialRef.current) {
@@ -82,4 +71,4 @@ const PlanetCloudObject = ({
   );
 };
 
-export default PlanetCloudObject;
+export default CraterLayer;

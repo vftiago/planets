@@ -1,47 +1,45 @@
-import { useLayoutEffect } from "react";
+import { useLayoutEffect, useMemo } from "react";
 
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import * as THREE from "three";
 
-import fragmentShader from "./planet-gas-dense.frag";
-import vertexShader from "./planet-gas-dense.vert";
+import fragmentShader from "./lakes.frag";
+import vertexShader from "./lakes.vert";
 import { DEFAULT_TIME_VALUE_UPDATE } from "../../constants";
-import { useTexture } from "@react-three/drei";
-import palette1 from "./gas_giant_colors.png";
-import palette2 from "./gas_giant_dark_colors.png";
 
-type PlanetGasDenseProps = {
+type LakeLayerProps = {
   meshProps?: JSX.IntrinsicElements["mesh"];
-  seed: number;
-  pixels?: number;
+  lakes?: number;
   lightPos?: THREE.Vector2;
   rotationSpeed?: number;
-  ringWidth?: number;
-  ringPerspective?: number;
-  scalePlanet?: number;
+  rivers?: number;
+  colors?: THREE.Color[];
   rotation?: number;
+  seed: number;
+  pixels?: number;
 };
 
-const PlanetGasDense = ({
+const BASE_LAKE_COLORS = [
+  new THREE.Color(79 / 255, 164 / 255, 184 / 255),
+  new THREE.Color(76 / 255, 104 / 255, 133 / 255),
+  new THREE.Color(58 / 255, 63 / 255, 94 / 255),
+];
+
+const LakeLayer = ({
   meshProps,
-  seed,
-  pixels = 100.0,
+  lakes = 0.6,
   lightPos = new THREE.Vector2(0.39, 0.7),
   rotationSpeed = 0.1,
+  rivers = 0.6,
+  colors,
   rotation = Math.random(),
-}: PlanetGasDenseProps) => {
+  seed,
+  pixels = 100.0,
+}: LakeLayerProps) => {
   const materialRef = useRef<THREE.ShaderMaterial>(null);
 
-  const { colorSchemeTexture } = useTexture({ colorSchemeTexture: palette1 });
-
-  colorSchemeTexture.magFilter = THREE.NearestFilter;
-  colorSchemeTexture.minFilter = THREE.NearestFilter;
-
-  const { darkColorSchemeTexture } = useTexture({ darkColorSchemeTexture: palette2 });
-
-  darkColorSchemeTexture.magFilter = THREE.NearestFilter;
-  darkColorSchemeTexture.minFilter = THREE.NearestFilter;
+  const colorPalette = useMemo(() => (colors ? colors : BASE_LAKE_COLORS), [colors]);
 
   useLayoutEffect(() => {
     if (!materialRef.current) {
@@ -49,18 +47,21 @@ const PlanetGasDense = ({
     }
 
     const uniforms = {
-      colorscheme: { value: colorSchemeTexture },
-      dark_colorscheme: { value: darkColorSchemeTexture },
       pixels: { value: pixels },
       light_origin: { value: lightPos },
-      time_speed: { value: rotationSpeed },
-      rotation: { value: rotation },
       seed: { value: seed },
+      time_speed: { value: rotationSpeed },
+      lake_cutoff: { value: lakes },
+      river_cutoff: { value: rivers },
+      rotation: { value: rotation },
+      color1: { value: new THREE.Vector4(...colorPalette[0], 1) },
+      color2: { value: new THREE.Vector4(...colorPalette[1], 1) },
+      color3: { value: new THREE.Vector4(...colorPalette[2], 1) },
       time: { value: 0.0 },
     };
 
     materialRef.current.uniforms = uniforms;
-  }, [seed, lightPos, rotation, rotationSpeed, colorSchemeTexture, darkColorSchemeTexture, pixels]);
+  }, [colorPalette, lightPos, seed, rotation, rivers, rotationSpeed, lakes, pixels]);
 
   useFrame(() => {
     if (!materialRef.current) {
@@ -85,4 +86,4 @@ const PlanetGasDense = ({
   );
 };
 
-export default PlanetGasDense;
+export default LakeLayer;

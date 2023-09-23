@@ -1,19 +1,20 @@
 import * as THREE from "three";
 
 import { PerspectiveCamera } from "@react-three/drei";
-import PlanetGasDense from "../layers/gas-dense/PlanetGasDense";
-import PlanetRingObject from "../layers/ring/PlanetRing";
+import GasDenseLayer from "../layers/gas-dense/GasDenseLayer";
+import RingLayer from "../layers/ring/RingLayer";
 
 type PlanetObjectProps = {
   seed: number;
   colors?: THREE.Color[];
+  rotation: number;
 };
 
 const GasRing = (planetObjectProps: PlanetObjectProps) => {
   return (
     <group>
-      <PlanetGasDense {...planetObjectProps} />
-      <PlanetRingObject {...planetObjectProps} meshProps={{ position: [0.0, 0.0, 0.01], scale: [2.0, 2.0, 0.0] }} />
+      <GasDenseLayer {...planetObjectProps} />
+      <RingLayer {...planetObjectProps} meshProps={{ position: [0.0, 0.0, 0.01], scale: [2.0, 2.0, 0.0] }} />
       <PerspectiveCamera makeDefault fov={90} position={[0, 0, 0.6]} />
     </group>
   );

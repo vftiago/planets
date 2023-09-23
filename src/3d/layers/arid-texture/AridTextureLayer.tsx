@@ -1,36 +1,39 @@
-import React, { useLayoutEffect, useMemo } from "react";
+import { useLayoutEffect } from "react";
 
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import * as THREE from "three";
 
-import fragmentShader from "./planet-rivers.frag";
-import vertexShader from "./planet-rivers.vert";
-import { BASE_RIVER_COLORS } from "../../colors";
+import fragmentShader from "./arid-texture.frag";
+import vertexShader from "./arid-texture.vert";
 import { DEFAULT_TIME_VALUE_UPDATE } from "../../constants";
+import palette from "./dry_terran.png";
+import { useTexture } from "@react-three/drei";
 
-type PlanetRiversProps = {
+type AridTextureLayerProps = {
   meshProps?: JSX.IntrinsicElements["mesh"];
   lightPos?: THREE.Vector2;
   rotationSpeed?: number;
-  rivers?: number;
   colors?: THREE.Color[];
   rotation?: number;
   seed: number;
+  pixels?: number;
 };
 
-const PlanetRiversObject = ({
+const AridTextureLayer = ({
   meshProps,
   lightPos = new THREE.Vector2(0.39, 0.7),
   rotationSpeed = 0.1,
-  rivers = 0.6,
-  colors,
   rotation = Math.random(),
   seed,
-}: PlanetRiversProps) => {
+  pixels = 100.0,
+}: AridTextureLayerProps) => {
   const materialRef = useRef<THREE.ShaderMaterial>(null);
 
-  const colorPalette = useMemo(() => (colors ? colors : BASE_RIVER_COLORS), [colors]);
+  const { colorSchemeTexture } = useTexture({ colorSchemeTexture: palette });
+
+  colorSchemeTexture.magFilter = THREE.NearestFilter;
+  colorSchemeTexture.minFilter = THREE.NearestFilter;
 
   useLayoutEffect(() => {
     if (!materialRef.current) {
@@ -38,19 +41,17 @@ const PlanetRiversObject = ({
     }
 
     const uniforms = {
+      pixels: { value: pixels },
       light_origin: { value: lightPos },
       seed: { value: seed },
       time_speed: { value: rotationSpeed },
-      river_cutoff: { value: rivers },
       rotation: { value: rotation },
-      color1: { value: new THREE.Vector4(...colorPalette[0], 1) },
-      color2: { value: new THREE.Vector4(...colorPalette[1], 1) },
-      color3: { value: new THREE.Vector4(...colorPalette[2], 1) },
+      colors: { value: colorSchemeTexture },
       time: { value: 0.0 },
     };
 
     materialRef.current.uniforms = uniforms;
-  }, [colorPalette, lightPos, seed, rotation, rivers, rotationSpeed]);
+  }, [colorSchemeTexture, lightPos, seed, rotation, rotationSpeed, pixels]);
 
   useFrame(() => {
     if (!materialRef.current) {
@@ -75,4 +76,4 @@ const PlanetRiversObject = ({
   );
 };
 
-export default PlanetRiversObject;
+export default AridTextureLayer;

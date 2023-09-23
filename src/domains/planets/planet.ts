@@ -27,6 +27,7 @@ export interface Planet extends GameEntity {
   biomes: Biome[];
   type: PlanetType;
   seed: number;
+  rotation: number;
   planetRef: MutableRefObject<HTMLDivElement>;
 }
 

@@ -10,24 +10,25 @@ import GasRing from "./GasRing";
 type PlanetObjectProps = {
   seed: number;
   type: PlanetType;
+  rotation: number;
 };
 
-const Planet = ({ seed, type }: PlanetObjectProps) => {
+const Planet = ({ seed, type, rotation }: PlanetObjectProps) => {
   switch (type) {
     case PlanetType.Terran:
-      return <Terran seed={seed} />;
+      return <Terran seed={seed} rotation={rotation} />;
     case PlanetType.Lava:
-      return <Lava seed={seed} />;
+      return <Lava seed={seed} rotation={rotation} />;
     case PlanetType.Ice:
-      return <Ice seed={seed} />;
+      return <Ice seed={seed} rotation={rotation} />;
     case PlanetType.Arid:
-      return <AridColors seed={seed} />;
+      return <AridColors seed={seed} rotation={rotation} />;
     case PlanetType.Gas:
-      return <Gas seed={seed} />;
+      return <Gas seed={seed} rotation={rotation} />;
     case PlanetType.GasRing:
-      return <GasRing seed={seed} />;
+      return <GasRing seed={seed} rotation={rotation} />;
     default:
-      return <NoAtmosphere seed={seed} />;
+      return <NoAtmosphere seed={seed} rotation={rotation} />;
   }
 };
 

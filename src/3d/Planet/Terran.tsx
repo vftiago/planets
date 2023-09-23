@@ -1,26 +1,27 @@
 import * as THREE from "three";
 
-import PlanetBaseObject from "../layers/base/PlanetBase";
-import PlanetLandObject from "../layers/land/PlanetLand";
-import PlanetCloudObject from "../layers/cloud/PlanetCloud";
-import PlanetAtmosphereObject from "../layers/atmosphere/PlanetAtmosphere";
-import PlanetRiversObject from "../layers/rivers/PlanetRivers";
+import BaseLayer from "../layers/base/BaseLayer";
+import LandLayer from "../layers/land/LandLayer";
+import CloudLayer from "../layers/cloud/CloudLayer";
+import AtmosphereLayer from "../layers/atmosphere/AtmosphereLayer";
+import RiversLayer from "../layers/river/RiverLayer";
 import { EARTH_COLORS } from "../colors";
 import { PerspectiveCamera } from "@react-three/drei";
 
 type PlanetObjectProps = {
   seed: number;
   colors?: THREE.Color[];
+  rotation: number;
 };
 
 const Terran = (planetObjectProps: PlanetObjectProps) => {
   return (
     <group>
-      <PlanetBaseObject {...planetObjectProps} colors={EARTH_COLORS} />
-      <PlanetLandObject {...planetObjectProps} />
-      <PlanetRiversObject {...planetObjectProps} />
-      <PlanetCloudObject {...planetObjectProps} />
-      <PlanetAtmosphereObject {...planetObjectProps} />
+      <BaseLayer {...planetObjectProps} colors={EARTH_COLORS} />
+      <LandLayer {...planetObjectProps} />
+      <CloudLayer {...planetObjectProps} />
+      <AtmosphereLayer {...planetObjectProps} />
+      <RiversLayer {...planetObjectProps} />
       <PerspectiveCamera makeDefault fov={90} position={[0, 0, 0.6]} />
     </group>
   );

@@ -4,22 +4,33 @@ import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import * as THREE from "three";
 
-import fragmentShader from "./planet-base.frag";
-import vertexShader from "./planet-base.vert";
-import { BASE_COLORS } from "../../colors";
+import fragmentShader from "./river.frag";
+import vertexShader from "./river.vert";
+import { BASE_RIVER_COLORS } from "../../colors";
 import { DEFAULT_TIME_VALUE_UPDATE } from "../../constants";
 
-type PlanetBaseProps = {
+type RiverLayerProps = {
   meshProps?: JSX.IntrinsicElements["mesh"];
-  seed: number;
+  lightPos?: THREE.Vector2;
+  rotationSpeed?: number;
+  rivers?: number;
   colors?: THREE.Color[];
   rotation?: number;
+  seed: number;
 };
 
-const PlanetBaseObject = ({ meshProps, seed, colors, rotation = Math.random() }: PlanetBaseProps) => {
+const RiverLayer = ({
+  meshProps,
+  lightPos = new THREE.Vector2(0.39, 0.7),
+  rotationSpeed = 0.1,
+  rivers = 0.6,
+  colors,
+  rotation = Math.random(),
+  seed,
+}: RiverLayerProps) => {
   const materialRef = useRef<THREE.ShaderMaterial>(null);
 
-  const colorPalette = useMemo(() => (colors ? colors : BASE_COLORS), [colors]);
+  const colorPalette = useMemo(() => (colors ? colors : BASE_RIVER_COLORS), [colors]);
 
   useLayoutEffect(() => {
     if (!materialRef.current) {
@@ -27,20 +38,19 @@ const PlanetBaseObject = ({ meshProps, seed, colors, rotation = Math.random() }:
     }
 
     const uniforms = {
-      pixels: { value: 100.0 },
+      light_origin: { value: lightPos },
+      seed: { value: seed },
+      time_speed: { value: rotationSpeed },
+      river_cutoff: { value: rivers },
+      rotation: { value: rotation },
       color1: { value: new THREE.Vector4(...colorPalette[0], 1) },
       color2: { value: new THREE.Vector4(...colorPalette[1], 1) },
       color3: { value: new THREE.Vector4(...colorPalette[2], 1) },
-      lightIntensity: { value: 0.1 },
-      light_origin: { value: new THREE.Vector2(0.39, 0.7) },
-      time_speed: { value: 0.1 },
-      rotation: { value: rotation },
-      seed: { value: seed },
       time: { value: 0.0 },
     };
 
     materialRef.current.uniforms = uniforms;
-  }, [colorPalette, seed, rotation]);
+  }, [colorPalette, lightPos, seed, rotation, rivers, rotationSpeed]);
 
   useFrame(() => {
     if (!materialRef.current) {
@@ -65,4 +75,4 @@ const PlanetBaseObject = ({ meshProps, seed, colors, rotation = Math.random() }:
   );
 };
 
-export default PlanetBaseObject;
+export default RiverLayer;

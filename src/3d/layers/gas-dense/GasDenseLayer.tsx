@@ -4,36 +4,44 @@ import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import * as THREE from "three";
 
-import fragmentShader from "./arid-texture.frag";
-import vertexShader from "./arid-texture.vert";
+import fragmentShader from "./gas-dense.frag";
+import vertexShader from "./gas-dense.vert";
 import { DEFAULT_TIME_VALUE_UPDATE } from "../../constants";
-import palette from "./dry_terran.png";
 import { useTexture } from "@react-three/drei";
+import palette1 from "./gas_giant_colors.png";
+import palette2 from "./gas_giant_dark_colors.png";
 
-type PlanetRiversProps = {
+type GasDenseLayerProps = {
   meshProps?: JSX.IntrinsicElements["mesh"];
-  lightPos?: THREE.Vector2;
-  rotationSpeed?: number;
-  colors?: THREE.Color[];
-  rotation?: number;
   seed: number;
   pixels?: number;
+  lightPos?: THREE.Vector2;
+  rotationSpeed?: number;
+  ringWidth?: number;
+  ringPerspective?: number;
+  scalePlanet?: number;
+  rotation?: number;
 };
 
-const PlanetAridTextureObject = ({
+const GasDenseLayer = ({
   meshProps,
+  seed,
+  pixels = 100.0,
   lightPos = new THREE.Vector2(0.39, 0.7),
   rotationSpeed = 0.1,
   rotation = Math.random(),
-  seed,
-  pixels = 100.0,
-}: PlanetRiversProps) => {
+}: GasDenseLayerProps) => {
   const materialRef = useRef<THREE.ShaderMaterial>(null);
 
-  const { colorSchemeTexture } = useTexture({ colorSchemeTexture: palette });
+  const { colorSchemeTexture } = useTexture({ colorSchemeTexture: palette1 });
 
   colorSchemeTexture.magFilter = THREE.NearestFilter;
   colorSchemeTexture.minFilter = THREE.NearestFilter;
+
+  const { darkColorSchemeTexture } = useTexture({ darkColorSchemeTexture: palette2 });
+
+  darkColorSchemeTexture.magFilter = THREE.NearestFilter;
+  darkColorSchemeTexture.minFilter = THREE.NearestFilter;
 
   useLayoutEffect(() => {
     if (!materialRef.current) {
@@ -41,17 +49,18 @@ const PlanetAridTextureObject = ({
     }
 
     const uniforms = {
+      colorscheme: { value: colorSchemeTexture },
+      dark_colorscheme: { value: darkColorSchemeTexture },
       pixels: { value: pixels },
       light_origin: { value: lightPos },
-      seed: { value: seed },
       time_speed: { value: rotationSpeed },
       rotation: { value: rotation },
-      colors: { value: colorSchemeTexture },
+      seed: { value: seed },
       time: { value: 0.0 },
     };
 
     materialRef.current.uniforms = uniforms;
-  }, [colorSchemeTexture, lightPos, seed, rotation, rotationSpeed, pixels]);
+  }, [seed, lightPos, rotation, rotationSpeed, colorSchemeTexture, darkColorSchemeTexture, pixels]);
 
   useFrame(() => {
     if (!materialRef.current) {
@@ -76,4 +85,4 @@ const PlanetAridTextureObject = ({
   );
 };
 
-export default PlanetAridTextureObject;
+export default GasDenseLayer;

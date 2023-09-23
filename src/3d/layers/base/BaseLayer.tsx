@@ -1,33 +1,25 @@
-import { useLayoutEffect } from "react";
+import { useLayoutEffect, useMemo } from "react";
 
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import * as THREE from "three";
 
-import fragmentShader from "./arid-colors.frag";
-import vertexShader from "./arid-colors.vert";
+import fragmentShader from "./base.frag";
+import vertexShader from "./base.vert";
+import { BASE_COLORS } from "../../colors";
 import { DEFAULT_TIME_VALUE_UPDATE } from "../../constants";
 
-type PlanetRiversProps = {
+type BaseLayerProps = {
   meshProps?: JSX.IntrinsicElements["mesh"];
-  lightPos?: THREE.Vector2;
-  rotationSpeed?: number;
+  seed: number;
   colors?: THREE.Color[];
   rotation?: number;
-  seed: number;
-  pixels?: number;
 };
 
-const PlanetAridColorsObject = ({
-  meshProps,
-  colors,
-  lightPos = new THREE.Vector2(0.39, 0.7),
-  rotationSpeed = 0.1,
-  rotation = Math.random(),
-  seed,
-  pixels = 100.0,
-}: PlanetRiversProps) => {
+const BaseLayer = ({ meshProps, seed, colors, rotation = Math.random() }: BaseLayerProps) => {
   const materialRef = useRef<THREE.ShaderMaterial>(null);
+
+  const colorPalette = useMemo(() => (colors ? colors : BASE_COLORS), [colors]);
 
   useLayoutEffect(() => {
     if (!materialRef.current) {
@@ -35,17 +27,20 @@ const PlanetAridColorsObject = ({
     }
 
     const uniforms = {
-      pixels: { value: pixels },
-      light_origin: { value: lightPos },
-      seed: { value: seed },
-      time_speed: { value: rotationSpeed },
+      pixels: { value: 100.0 },
+      color1: { value: new THREE.Vector4(...colorPalette[0], 1) },
+      color2: { value: new THREE.Vector4(...colorPalette[1], 1) },
+      color3: { value: new THREE.Vector4(...colorPalette[2], 1) },
+      lightIntensity: { value: 0.1 },
+      light_origin: { value: new THREE.Vector2(0.39, 0.7) },
+      time_speed: { value: 0.1 },
       rotation: { value: rotation },
-      colors: { value: colors },
+      seed: { value: seed },
       time: { value: 0.0 },
     };
 
     materialRef.current.uniforms = uniforms;
-  }, [colors, lightPos, seed, rotation, rotationSpeed, pixels]);
+  }, [colorPalette, seed, rotation]);
 
   useFrame(() => {
     if (!materialRef.current) {
@@ -70,4 +65,4 @@ const PlanetAridColorsObject = ({
   );
 };
 
-export default PlanetAridColorsObject;
+export default BaseLayer;

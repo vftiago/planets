@@ -4,38 +4,48 @@ import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import * as THREE from "three";
 
-import fragmentShader from "./planet-background.frag";
-import vertexShader from "./planet-background.vert";
+import fragmentShader from "./arid-colors.frag";
+import vertexShader from "./arid-colors.vert";
 import { DEFAULT_TIME_VALUE_UPDATE } from "../../constants";
-import { useTexture } from "@react-three/drei";
-import color from "./palette.png";
 
-type PlanetBaseProps = {
+type AridColorsLayerProps = {
   meshProps?: JSX.IntrinsicElements["mesh"];
+  lightPos?: THREE.Vector2;
+  rotationSpeed?: number;
+  colors?: THREE.Color[];
+  rotation?: number;
   seed: number;
+  pixels?: number;
 };
 
-// looks bad. try to find a better nebula-style fragment shader online
-const PlanetBackgroundObject = ({ meshProps, seed }: PlanetBaseProps) => {
+const AridColorsLayer = ({
+  meshProps,
+  colors,
+  lightPos = new THREE.Vector2(0.39, 0.7),
+  rotationSpeed = 0.1,
+  rotation = Math.random(),
+  seed,
+  pixels = 100.0,
+}: AridColorsLayerProps) => {
   const materialRef = useRef<THREE.ShaderMaterial>(null);
-
-  const { colorSchemeTexture } = useTexture({ colorSchemeTexture: color });
 
   useLayoutEffect(() => {
     if (!materialRef.current) {
       return;
     }
 
-    colorSchemeTexture.magFilter = THREE.NearestFilter;
-    colorSchemeTexture.minFilter = THREE.NearestFilter;
-
     const uniforms = {
-      colorscheme: { value: colorSchemeTexture },
+      pixels: { value: pixels },
+      light_origin: { value: lightPos },
       seed: { value: seed },
+      time_speed: { value: rotationSpeed },
+      rotation: { value: rotation },
+      colors: { value: colors },
+      time: { value: 0.0 },
     };
 
     materialRef.current.uniforms = uniforms;
-  }, [colorSchemeTexture, seed]);
+  }, [colors, lightPos, seed, rotation, rotationSpeed, pixels]);
 
   useFrame(() => {
     if (!materialRef.current) {
@@ -49,7 +59,7 @@ const PlanetBackgroundObject = ({ meshProps, seed }: PlanetBaseProps) => {
 
   return (
     <mesh {...meshProps}>
-      <planeGeometry args={[3, 3]} />
+      <planeGeometry args={[1, 1]} />
       <shaderMaterial
         ref={materialRef}
         vertexShader={vertexShader}
@@ -60,4 +70,4 @@ const PlanetBackgroundObject = ({ meshProps, seed }: PlanetBaseProps) => {
   );
 };
 
-export default PlanetBackgroundObject;
+export default AridColorsLayer;

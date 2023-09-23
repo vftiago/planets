@@ -1,22 +1,23 @@
 import * as THREE from "three";
 
-import PlanetBaseObject from "../layers/base/PlanetBase";
+import BaseLayer from "../layers/base/BaseLayer";
 import { PerspectiveCamera } from "@react-three/drei";
-import PlanetCraterObject from "../layers/crater/PlanetCrater";
-import PlanetRiversObject from "../layers/rivers/PlanetRivers";
+import CraterLayer from "../layers/crater/CraterLayer";
+import RiversLayer from "../layers/river/RiverLayer";
 import { BASE_LAVA_COLORS, BASE_LAVA_CRATER_COLORS, BASE_LAVA_RIVER_COLORS } from "../colors";
 
 type PlanetObjectProps = {
   seed: number;
   colors?: THREE.Color[];
+  rotation: number;
 };
 
 const Lava = (planetObjectProps: PlanetObjectProps) => {
   return (
     <group>
-      <PlanetBaseObject {...planetObjectProps} colors={BASE_LAVA_COLORS} />
-      <PlanetCraterObject {...planetObjectProps} colors={BASE_LAVA_CRATER_COLORS} />
-      <PlanetRiversObject {...planetObjectProps} colors={BASE_LAVA_RIVER_COLORS} />
+      <BaseLayer {...planetObjectProps} colors={BASE_LAVA_COLORS} />
+      <CraterLayer {...planetObjectProps} colors={BASE_LAVA_CRATER_COLORS} />
+      <RiversLayer {...planetObjectProps} colors={BASE_LAVA_RIVER_COLORS} />
       <PerspectiveCamera makeDefault fov={90} position={[0, 0, 0.6]} />
     </group>
   );

@@ -6,15 +6,17 @@ import { PlanetType } from "../domains/planets/planet";
 const PlanetView = ({
   seed,
   type,
+  rotation,
   planetRef,
 }: {
   seed: number;
   type: PlanetType;
+  rotation: number;
   planetRef: MutableRefObject<HTMLElement>;
 }) => {
   const viewRef = useRef(
     <View track={planetRef}>
-      <Planet seed={seed} type={type} />
+      <Planet seed={seed} type={type} rotation={rotation} />
     </View>
   );
 

@@ -1,19 +1,20 @@
 import * as THREE from "three";
 
-import PlanetBaseObject from "../layers/base/PlanetBase";
+import BaseLayer from "../layers/base/BaseLayer";
 import { PerspectiveCamera } from "@react-three/drei";
-import PlanetCraterObject from "../layers/crater/PlanetCrater";
+import CraterLayer from "../layers/crater/CraterLayer";
 
 type PlanetObjectProps = {
   seed: number;
   colors?: THREE.Color[];
+  rotation: number;
 };
 
 const NoAtmosphere = (planetObjectProps: PlanetObjectProps) => {
   return (
     <group>
-      <PlanetBaseObject {...planetObjectProps} />
-      <PlanetCraterObject {...planetObjectProps} />
+      <BaseLayer {...planetObjectProps} />
+      <CraterLayer {...planetObjectProps} />
       <PerspectiveCamera makeDefault fov={90} position={[0, 0, 0.6]} />
     </group>
   );
