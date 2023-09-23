@@ -46,7 +46,7 @@ const AtmosphereLayer = ({ meshProps, colors }: AtmosphereLayerProps) => {
 
   return (
     <mesh {...meshProps}>
-      <planeGeometry args={[1.02, 1.02]} />
+      <planeGeometry args={[1.2, 1.2]} />
       <shaderMaterial
         ref={materialRef}
         vertexShader={vertexShader}
