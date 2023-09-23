@@ -21,6 +21,14 @@ export const GAS_COLORS = [
   new THREE.Color(0.129412, 0.0941176, 0.105882),
 ];
 
+export const BASE_ARID_COLORS = [
+  new THREE.Color(1.0, 0.537255, 0.2),
+  new THREE.Color(0.901961, 0.270588, 0.223529),
+  new THREE.Color(0.678431, 0.184314, 0.270588),
+  new THREE.Color(0.321569, 0.2, 0.247059),
+  new THREE.Color(0.239216, 0.160784, 0.211765),
+];
+
 export const RANDOM_COLORS = randomizeColors();
 
 export const BASE_LAVA_COLORS = [
