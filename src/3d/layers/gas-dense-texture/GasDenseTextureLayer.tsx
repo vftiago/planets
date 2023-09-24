@@ -4,14 +4,14 @@ import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import * as THREE from "three";
 
-import fragmentShader from "./gas-dense.frag";
-import vertexShader from "./gas-dense.vert";
+import fragmentShader from "./gas-dense-texture.frag";
+import vertexShader from "./gas-dense-texture.vert";
 import { DEFAULT_TIME_VALUE_UPDATE } from "../../constants";
 import { useTexture } from "@react-three/drei";
 import palette1 from "./gas_giant_colors.png";
 import palette2 from "./gas_giant_dark_colors.png";
 
-type GasDenseLayerProps = {
+type GasDenseTextureLayerProps = {
   meshProps?: JSX.IntrinsicElements["mesh"];
   seed: number;
   pixels?: number;
@@ -23,23 +23,23 @@ type GasDenseLayerProps = {
   rotation?: number;
 };
 
-const GasDenseLayer = ({
+const GasDenseTextureLayer = ({
   meshProps,
   seed,
   pixels = 100.0,
   lightPos = new THREE.Vector2(0.39, 0.7),
   rotationSpeed = 0.1,
   rotation,
-}: GasDenseLayerProps) => {
+}: GasDenseTextureLayerProps) => {
   const materialRef = useRef<THREE.ShaderMaterial>(null);
 
-  const { colorSchemeTexture } = useTexture({ colorSchemeTexture: palette1 });
+  const { colorSchemeTexture, darkColorSchemeTexture } = useTexture({
+    colorSchemeTexture: palette1,
+    darkColorSchemeTexture: palette2,
+  });
 
   colorSchemeTexture.magFilter = THREE.NearestFilter;
   colorSchemeTexture.minFilter = THREE.NearestFilter;
-
-  const { darkColorSchemeTexture } = useTexture({ darkColorSchemeTexture: palette2 });
-
   darkColorSchemeTexture.magFilter = THREE.NearestFilter;
   darkColorSchemeTexture.minFilter = THREE.NearestFilter;
 
@@ -85,4 +85,4 @@ const GasDenseLayer = ({
   );
 };
 
-export default GasDenseLayer;
+export default GasDenseTextureLayer;
