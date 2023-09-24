@@ -1,7 +1,7 @@
 import * as THREE from "three";
 
 import { PerspectiveCamera } from "@react-three/drei";
-import RingLayer from "../layers/ring/RingLayer";
+import RingTextureLayer from "../layers/ring/RingTextureLayer";
 import GasDenseColorsLayer from "../layers/gas-dense-colors/GasDenseColorsLayer";
 
 type PlanetObjectProps = {
@@ -14,7 +14,7 @@ const GasRing = (planetObjectProps: PlanetObjectProps) => {
   return (
     <group>
       <GasDenseColorsLayer {...planetObjectProps} />
-      <RingLayer
+      <RingTextureLayer
         {...planetObjectProps}
         ringWidth={0.1}
         meshProps={{ position: [0.0, 0.0, 0.01], scale: [2.0, 2.0, 0.0] }}

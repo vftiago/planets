@@ -4,14 +4,14 @@ import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import * as THREE from "three";
 
-import fragmentShader from "./ring.frag";
-import vertexShader from "./ring.vert";
+import fragmentShader from "./ring-texture.frag";
+import vertexShader from "./ring-texture.vert";
 import { DEFAULT_TIME_VALUE_UPDATE } from "../../constants";
 import { useTexture } from "@react-three/drei";
 import palette1 from "./gas_giant_colors.png";
 import palette2 from "./gas_giant_dark_colors.png";
 
-type RingLayerProps = {
+type RingTextureLayerProps = {
   meshProps?: JSX.IntrinsicElements["mesh"];
   seed: number;
   pixels?: number;
@@ -23,7 +23,7 @@ type RingLayerProps = {
   rotation?: number;
 };
 
-const RingLayer = ({
+const RingTextureLayer = ({
   meshProps,
   seed,
   pixels = 250.0,
@@ -33,7 +33,7 @@ const RingLayer = ({
   ringPerspective = 6.0,
   scalePlanet = 4.0,
   rotation,
-}: RingLayerProps) => {
+}: RingTextureLayerProps) => {
   const materialRef = useRef<THREE.ShaderMaterial>(null);
 
   const { colorSchemeTexture } = useTexture({ colorSchemeTexture: palette1 });
@@ -102,4 +102,4 @@ const RingLayer = ({
   );
 };
 
-export default RingLayer;
+export default RingTextureLayer;
