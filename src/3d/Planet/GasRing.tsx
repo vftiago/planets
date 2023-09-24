@@ -16,7 +16,7 @@ const GasRing = (planetObjectProps: PlanetObjectProps) => {
       <GasDenseLayer {...planetObjectProps} />
       <RingLayer
         {...planetObjectProps}
-        rotation={Math.random() * 2 - 1}
+        ringWidth={0.1}
         meshProps={{ position: [0.0, 0.0, 0.01], scale: [2.0, 2.0, 0.0] }}
       />
       <PerspectiveCamera makeDefault fov={90} position={[0, 0, 0.6]} />

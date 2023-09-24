@@ -48,16 +48,6 @@ float fbm(vec2 coord){
     return value;
 }
 
-float circleNoise(vec2 uv) {
-    float uv_y = floor(uv.y);
-    uv.x += uv_y*.31;
-    vec2 f = fract(uv);
-    float h = rand(vec2(floor(uv.x),floor(uv_y)));
-    float m = (length(f-0.25-(h*0.5)));
-    float r = h*0.25;
-    return smoothstep(0.0, r, m*0.75);
-}
-
 vec2 spherify(vec2 uv) {
     vec2 centered= uv *2.0-1.0;
     float z = sqrt(1.0 - dot(centered.xy, centered.xy));
@@ -98,7 +88,7 @@ void main() {
     // rotate material in the ring
     uv_center = rotate(uv_center+vec2(0, 0.5), time*time_speed);
     // some noise
-    ring *= fbm(uv_center*size);
+    // ring *= fbm(uv_center*size);
     
     // apply some colors based on final value
     float posterized = floor((ring+pow(light_d, 2.0)*2.0)*4.0)/4.0;

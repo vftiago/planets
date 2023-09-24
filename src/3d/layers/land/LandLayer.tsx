@@ -6,7 +6,7 @@ import * as THREE from "three";
 
 import fragmentShader from "./land.frag";
 import vertexShader from "./land.vert";
-import { BASE_LAND_COLORS } from "../../colors";
+import { BASE_TERRAN_LAND_COLORS } from "../../colors";
 import { DEFAULT_TIME_VALUE_UPDATE } from "../../constants";
 
 type LandLayerProps = {
@@ -32,7 +32,7 @@ const LandLayer = ({
 }: LandLayerProps) => {
   const materialRef = useRef<THREE.ShaderMaterial>(null);
 
-  const colorPalette = useMemo(() => (colors ? colors : BASE_LAND_COLORS), [colors]);
+  const colorPalette = useMemo(() => (colors ? colors : BASE_TERRAN_LAND_COLORS), [colors]);
 
   useLayoutEffect(() => {
     if (!materialRef.current) {

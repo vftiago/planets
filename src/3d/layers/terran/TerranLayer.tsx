@@ -4,33 +4,35 @@ import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import * as THREE from "three";
 
-import fragmentShader from "./river.frag";
-import vertexShader from "./river.vert";
-import { BASE_RIVER_COLORS } from "../../colors";
+import fragmentShader from "./terran.frag";
+import vertexShader from "./terran.vert";
+import { BASE_TERRAN_COLORS } from "../../colors";
 import { DEFAULT_TIME_VALUE_UPDATE } from "../../constants";
 
-type RiverLayerProps = {
+type TerranLayerProps = {
   meshProps?: JSX.IntrinsicElements["mesh"];
   lightPos?: THREE.Vector2;
   rotationSpeed?: number;
+  pixels?: number;
   rivers?: number;
   colors?: THREE.Color[];
   rotation?: number;
   seed: number;
 };
 
-const RiverLayer = ({
+const TerranLayer = ({
   meshProps,
   lightPos = new THREE.Vector2(0.39, 0.7),
   rotationSpeed = 0.1,
-  rivers = 0.6,
+  rivers = 0.368,
+  pixels = 100.0,
   colors,
   rotation,
   seed,
-}: RiverLayerProps) => {
+}: TerranLayerProps) => {
   const materialRef = useRef<THREE.ShaderMaterial>(null);
 
-  const colorPalette = useMemo(() => (colors ? colors : BASE_RIVER_COLORS), [colors]);
+  const colorPalette = useMemo(() => (colors ? colors : BASE_TERRAN_COLORS), [colors]);
 
   useLayoutEffect(() => {
     if (!materialRef.current) {
@@ -43,14 +45,18 @@ const RiverLayer = ({
       time_speed: { value: rotationSpeed },
       river_cutoff: { value: rivers },
       rotation: { value: rotation },
-      color1: { value: new THREE.Vector4(...colorPalette[0], 1) },
-      color2: { value: new THREE.Vector4(...colorPalette[1], 1) },
-      color3: { value: new THREE.Vector4(...colorPalette[2], 1) },
+      pixels: { value: pixels },
+      col1: { value: new THREE.Vector4(...colorPalette[0], 1) },
+      col2: { value: new THREE.Vector4(...colorPalette[1], 1) },
+      col3: { value: new THREE.Vector4(...colorPalette[2], 1) },
+      col4: { value: new THREE.Vector4(...colorPalette[3], 1) },
+      river_col: { value: new THREE.Vector4(...colorPalette[4], 1) },
+      river_col_dark: { value: new THREE.Vector4(...colorPalette[5], 1) },
       time: { value: 0.0 },
     };
 
     materialRef.current.uniforms = uniforms;
-  }, [colorPalette, lightPos, seed, rotation, rivers, rotationSpeed]);
+  }, [colorPalette, lightPos, seed, rotation, rivers, rotationSpeed, pixels]);
 
   useFrame(() => {
     if (!materialRef.current) {
@@ -75,4 +81,4 @@ const RiverLayer = ({
   );
 };
 
-export default RiverLayer;
+export default TerranLayer;

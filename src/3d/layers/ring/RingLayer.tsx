@@ -28,7 +28,7 @@ const RingLayer = ({
   seed,
   pixels = 250.0,
   lightPos = new THREE.Vector2(0.39, 0.7),
-  rotationSpeed = 0.1,
+  rotationSpeed = 0.05,
   ringWidth = 0.143,
   ringPerspective = 6.0,
   scalePlanet = 4.0,

@@ -4,37 +4,33 @@ import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import * as THREE from "three";
 
-import fragmentShader from "./lake.frag";
-import vertexShader from "./lake.vert";
+import fragmentShader from "./lava-river.frag";
+import vertexShader from "./lava-river.vert";
+import { BASE_TERRAN_COLORS } from "../../colors";
 import { DEFAULT_TIME_VALUE_UPDATE } from "../../constants";
-import { BASE_LAKE_COLORS } from "../../colors";
 
-type LakeLayerProps = {
+type LavaRiverLayerProps = {
   meshProps?: JSX.IntrinsicElements["mesh"];
-  lakes?: number;
   lightPos?: THREE.Vector2;
   rotationSpeed?: number;
   rivers?: number;
   colors?: THREE.Color[];
   rotation?: number;
   seed: number;
-  pixels?: number;
 };
 
-const LakeLayer = ({
+const LavaRiverLayer = ({
   meshProps,
-  lakes = 0.6,
   lightPos = new THREE.Vector2(0.39, 0.7),
   rotationSpeed = 0.1,
   rivers = 0.6,
   colors,
   rotation,
   seed,
-  pixels = 100.0,
-}: LakeLayerProps) => {
+}: LavaRiverLayerProps) => {
   const materialRef = useRef<THREE.ShaderMaterial>(null);
 
-  const colorPalette = useMemo(() => (colors ? colors : BASE_LAKE_COLORS), [colors]);
+  const colorPalette = useMemo(() => (colors ? colors : BASE_TERRAN_COLORS), [colors]);
 
   useLayoutEffect(() => {
     if (!materialRef.current) {
@@ -42,11 +38,9 @@ const LakeLayer = ({
     }
 
     const uniforms = {
-      pixels: { value: pixels },
       light_origin: { value: lightPos },
       seed: { value: seed },
       time_speed: { value: rotationSpeed },
-      lake_cutoff: { value: lakes },
       river_cutoff: { value: rivers },
       rotation: { value: rotation },
       color1: { value: new THREE.Vector4(...colorPalette[0], 1) },
@@ -56,7 +50,7 @@ const LakeLayer = ({
     };
 
     materialRef.current.uniforms = uniforms;
-  }, [colorPalette, lightPos, seed, rotation, rivers, rotationSpeed, lakes, pixels]);
+  }, [colorPalette, lightPos, seed, rotation, rivers, rotationSpeed]);
 
   useFrame(() => {
     if (!materialRef.current) {
@@ -81,4 +75,4 @@ const LakeLayer = ({
   );
 };
 
-export default LakeLayer;
+export default LavaRiverLayer;
