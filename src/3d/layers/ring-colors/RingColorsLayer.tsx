@@ -13,6 +13,8 @@ type RingColorsLayerProps = {
   seed: number;
   pixels?: number;
   lightPos?: THREE.Vector2;
+  colors?: THREE.Color[];
+  darkColors?: THREE.Color[];
   rotationSpeed?: number;
   ringWidth?: number;
   ringPerspective?: number;
@@ -35,6 +37,8 @@ const BASE_GAS_DARK_COLORS = [
 const RingColorsLayer = ({
   meshProps,
   seed,
+  colors,
+  darkColors,
   pixels = 250.0,
   lightPos = new THREE.Vector2(0.39, 0.7),
   rotationSpeed = 0.05,
@@ -50,8 +54,8 @@ const RingColorsLayer = ({
     }
 
     const uniforms = {
-      colorscheme: { value: BASE_GAS_COLORS },
-      dark_colorscheme: { value: BASE_GAS_DARK_COLORS },
+      colorscheme: { value: colors ?? BASE_GAS_COLORS },
+      dark_colorscheme: { value: darkColors ?? BASE_GAS_DARK_COLORS },
       ring_width: { value: ringWidth },
       ring_perspective: { value: ringPerspective },
       scale_rel_to_planet: { value: scalePlanet },
@@ -64,7 +68,7 @@ const RingColorsLayer = ({
     };
 
     materialRef.current.uniforms = uniforms;
-  }, [seed, lightPos, rotation, rotationSpeed, pixels, ringPerspective, ringWidth, scalePlanet]);
+  }, [seed, colors, darkColors, lightPos, rotation, rotationSpeed, pixels, ringPerspective, ringWidth, scalePlanet]);
 
   useFrame(() => {
     if (!materialRef.current) {

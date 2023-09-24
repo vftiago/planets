@@ -1,5 +1,4 @@
 import * as THREE from "three";
-import { randomizeColors } from "./utils";
 
 export const BASE_COLORS = [
   new THREE.Color(155 / 255, 158 / 255, 184 / 255),
@@ -28,8 +27,6 @@ export const BASE_ARID_COLORS = [
   new THREE.Color(0.321569, 0.2, 0.247059),
   new THREE.Color(0.239216, 0.160784, 0.211765),
 ];
-
-export const RANDOM_COLORS = randomizeColors();
 
 export const BASE_LAVA_COLORS = [
   new THREE.Color(0.560784, 0.301961, 0.341176),
