@@ -4,14 +4,11 @@ import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import * as THREE from "three";
 
-import fragmentShader from "./ring-texture.frag";
-import vertexShader from "./ring-texture.vert";
+import fragmentShader from "./ring-colors.frag";
+import vertexShader from "./ring-colors.vert";
 import { DEFAULT_TIME_VALUE_UPDATE } from "../../constants";
-import { useTexture } from "@react-three/drei";
-import palette1 from "./gas_giant_colors.png";
-import palette2 from "./gas_giant_dark_colors.png";
 
-type RingTextureLayerProps = {
+type RingColorsLayerProps = {
   meshProps?: JSX.IntrinsicElements["mesh"];
   seed: number;
   pixels?: number;
@@ -23,7 +20,19 @@ type RingTextureLayerProps = {
   rotation?: number;
 };
 
-const RingTextureLayer = ({
+const BASE_GAS_COLORS = [
+  new THREE.Color(0.933333, 0.764706, 0.603922),
+  new THREE.Color(0.85098, 0.627451, 0.4),
+  new THREE.Color(0.560784, 0.337255, 0.231373),
+];
+
+const BASE_GAS_DARK_COLORS = [
+  new THREE.Color(0.4, 0.223529, 0.192157),
+  new THREE.Color(0.270588, 0.156863, 0.235294),
+  new THREE.Color(0.133333, 0.12549, 0.203922),
+];
+
+const RingColorsLayer = ({
   meshProps,
   seed,
   pixels = 250.0,
@@ -33,27 +42,16 @@ const RingTextureLayer = ({
   ringPerspective = 6.0,
   scalePlanet = 4.0,
   rotation,
-}: RingTextureLayerProps) => {
+}: RingColorsLayerProps) => {
   const materialRef = useRef<THREE.ShaderMaterial>(null);
-
-  const { colorSchemeTexture, darkColorSchemeTexture } = useTexture({
-    colorSchemeTexture: palette1,
-    darkColorSchemeTexture: palette2,
-  });
-
-  colorSchemeTexture.magFilter = THREE.NearestFilter;
-  colorSchemeTexture.minFilter = THREE.NearestFilter;
-  darkColorSchemeTexture.magFilter = THREE.NearestFilter;
-  darkColorSchemeTexture.minFilter = THREE.NearestFilter;
-
   useLayoutEffect(() => {
     if (!materialRef.current) {
       return;
     }
 
     const uniforms = {
-      colorscheme: { value: colorSchemeTexture },
-      dark_colorscheme: { value: darkColorSchemeTexture },
+      colorscheme: { value: BASE_GAS_COLORS },
+      dark_colorscheme: { value: BASE_GAS_DARK_COLORS },
       ring_width: { value: ringWidth },
       ring_perspective: { value: ringPerspective },
       scale_rel_to_planet: { value: scalePlanet },
@@ -66,18 +64,7 @@ const RingTextureLayer = ({
     };
 
     materialRef.current.uniforms = uniforms;
-  }, [
-    seed,
-    lightPos,
-    rotation,
-    rotationSpeed,
-    colorSchemeTexture,
-    darkColorSchemeTexture,
-    pixels,
-    ringPerspective,
-    ringWidth,
-    scalePlanet,
-  ]);
+  }, [seed, lightPos, rotation, rotationSpeed, pixels, ringPerspective, ringWidth, scalePlanet]);
 
   useFrame(() => {
     if (!materialRef.current) {
@@ -102,4 +89,4 @@ const RingTextureLayer = ({
   );
 };
 
-export default RingTextureLayer;
+export default RingColorsLayer;
