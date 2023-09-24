@@ -14,6 +14,8 @@ type PlanetObjectProps = {
 };
 
 const Planet = ({ seed, type, rotation }: PlanetObjectProps) => {
+  return <GasRing seed={seed} rotation={rotation} />;
+
   switch (type) {
     case PlanetType.Terran:
       return <Terran seed={seed} rotation={rotation} />;
