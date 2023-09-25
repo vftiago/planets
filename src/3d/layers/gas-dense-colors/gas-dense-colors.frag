@@ -4,8 +4,8 @@ uniform float rotation;
 uniform vec2 light_origin;
 uniform float time_speed;
 uniform float cloud_cover;
-float stretch = 2.0;
-float cloud_curve = 1.3;
+uniform float stretch;
+uniform float flatten;
 float light_border_1 = 0.4;
 float light_border_2 = 0.6;
 float bands = 1.0;
@@ -78,7 +78,7 @@ bool dither(vec2 uv_pixel, vec2 uv_real) {
 vec2 spherify(vec2 uv) {
     vec2 centered= uv *2.0-1.0;
     float z = sqrt(1.0 - dot(centered.xy, centered.xy));
-    vec2 sphere = centered/(z + 1.0);
+    vec2 sphere = centered/((z / flatten) + stretch);
     return sphere * 0.5+0.5;
 }
 

@@ -18,6 +18,8 @@ type GasDenseColorsLayerProps = {
   ringPerspective?: number;
   scalePlanet?: number;
   rotation?: number;
+  stretch?: number;
+  flatten?: number;
 };
 
 const BASE_GAS_COLORS = [
@@ -38,6 +40,8 @@ const GasDenseColorsLayer = ({
   pixels = 100.0,
   lightPos = new THREE.Vector2(0.39, 0.7),
   rotationSpeed = 0.1,
+  flatten = 1.3,
+  stretch = 3.0,
   rotation,
 }: GasDenseColorsLayerProps) => {
   const materialRef = useRef<THREE.ShaderMaterial>(null);
@@ -54,12 +58,14 @@ const GasDenseColorsLayer = ({
       light_origin: { value: lightPos },
       time_speed: { value: rotationSpeed },
       rotation: { value: rotation },
+      flatten: { value: flatten },
+      stretch: { value: stretch },
       seed: { value: seed },
       time: { value: 0.0 },
     };
 
     materialRef.current.uniforms = uniforms;
-  }, [seed, lightPos, rotation, rotationSpeed, pixels]);
+  }, [seed, lightPos, rotation, rotationSpeed, flatten, stretch, pixels]);
 
   useFrame(() => {
     if (!materialRef.current) {
