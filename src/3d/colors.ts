@@ -114,3 +114,17 @@ export const BASE_LAKE_COLORS = [
   new THREE.Color(76 / 255, 104 / 255, 133 / 255),
   new THREE.Color(58 / 255, 63 / 255, 94 / 255),
 ];
+
+export const BLUE_LAVA_BASE_COLORS = [
+  new THREE.Color("#50478A"),
+  new THREE.Color("#422F5C"),
+  new THREE.Color("#28182E"),
+];
+
+export const BLUE_LAVA_CRATER_COLORS = [new THREE.Color("#422F5C"), new THREE.Color("#28182E")];
+
+export const BLUE_LAVA_RIVER_COLORS = [
+  new THREE.Color("#51D9DA"),
+  new THREE.Color("#366C91"),
+  new THREE.Color("#1B2449"),
+];

@@ -22,7 +22,7 @@ type LavaRiverLayerProps = {
 const LavaRiverLayer = ({
   meshProps,
   lightPos = new THREE.Vector2(0.39, 0.7),
-  rotationSpeed = 0.1,
+  rotationSpeed = 0.2,
   rivers = 0.6,
   colors,
   rotation,
