@@ -20,21 +20,13 @@ export const GAS_COLORS = [
   new THREE.Color(0.129412, 0.0941176, 0.105882),
 ];
 
-export const BASE_ARID_COLORS = [
-  new THREE.Color(1.0, 0.537255, 0.2),
-  new THREE.Color(0.901961, 0.270588, 0.223529),
-  new THREE.Color(0.678431, 0.184314, 0.270588),
-  new THREE.Color(0.321569, 0.2, 0.247059),
-  new THREE.Color(0.239216, 0.160784, 0.211765),
-];
-
 export const BASE_LAVA_COLORS = [
   new THREE.Color(0.560784, 0.301961, 0.341176),
   new THREE.Color(0.321569, 0.2, 0.247059),
   new THREE.Color(0.239216, 0.160784, 0.211765),
 ];
 
-export const BASE_EARTH_COLORS = [
+export const BASE_OCEAN_COLORS = [
   new THREE.Color(0.572549, 0.909804, 0.752941),
   new THREE.Color(0.309804, 0.643137, 0.721569),
   new THREE.Color(0.172549, 0.207843, 0.301961),
@@ -70,12 +62,12 @@ export const BASE_CLOUD_COLORS = [
   new THREE.Color(0.25098, 0.286275, 0.45098),
 ];
 
-// export const BASE_LAND_COLORS = [
-//   new THREE.Color(0.784314, 0.831373, 0.364706),
-//   new THREE.Color(0.388235, 0.670588, 0.247059),
-//   new THREE.Color(0.184314, 0.341176, 0.32549),
-//   new THREE.Color(0.156863, 0.207843, 0.25098),
-// ];
+export const BASE_LAND_MASS_COLORS = [
+  new THREE.Color(0.784314, 0.831373, 0.364706),
+  new THREE.Color(0.388235, 0.670588, 0.247059),
+  new THREE.Color(0.184314, 0.341176, 0.32549),
+  new THREE.Color(0.156863, 0.207843, 0.25098),
+];
 
 // export const BASE_CLOUD_COLORS = [
 //   new THREE.Color(0.882353, 0.94902, 1),

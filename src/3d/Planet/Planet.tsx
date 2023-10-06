@@ -6,6 +6,7 @@ import Ice from "./Ice";
 import AridColors from "./AridColors";
 import Gas from "./Gas";
 import GasRing from "./GasRing";
+import Ocean from "./Ocean";
 
 type PlanetObjectProps = {
   seed: number;
@@ -14,7 +15,7 @@ type PlanetObjectProps = {
 };
 
 const Planet = ({ seed, type, rotation }: PlanetObjectProps) => {
-  return <GasRing seed={seed} rotation={rotation} />;
+  return <Ocean seed={seed} rotation={rotation} />;
 
   switch (type) {
     case PlanetType.Terran:
