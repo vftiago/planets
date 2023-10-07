@@ -4,8 +4,8 @@ import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import * as THREE from "three";
 
-import fragmentShader from "./ocean.frag";
-import vertexShader from "./ocean.vert";
+import fragmentShader from "./island.frag";
+import vertexShader from "./island.vert";
 import { BASE_LAND_MASS_COLORS as BASE_ISLAND_COLORS } from "../../colors";
 import { DEFAULT_TIME_VALUE_UPDATE } from "../../constants";
 
