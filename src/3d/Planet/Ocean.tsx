@@ -3,7 +3,7 @@ import * as THREE from "three";
 import CloudLayer from "../layers/cloud/CloudLayer";
 import AtmosphereLayer from "../layers/atmosphere/AtmosphereLayer";
 import { PerspectiveCamera } from "@react-three/drei";
-import IslandLayer from "../layers/ocean/OceanLayer";
+import IslandLayer from "../layers/island/IslandLayer";
 import BaseLayer from "../layers/base/BaseLayer";
 import { BASE_OCEAN_COLORS } from "../colors";
 
