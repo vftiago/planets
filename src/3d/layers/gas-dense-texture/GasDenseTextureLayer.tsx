@@ -5,7 +5,7 @@ import { useRef } from "react";
 import * as THREE from "three";
 
 import fragmentShader from "./gas-dense-texture.frag";
-import vertexShader from "./gas-dense-texture.vert";
+import vertexShader from "../base.vert";
 import { DEFAULT_TIME_VALUE_UPDATE } from "../../constants";
 import { useTexture } from "@react-three/drei";
 import palette1 from "./gas_giant_colors.png";

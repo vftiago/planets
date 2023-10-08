@@ -5,7 +5,7 @@ import { useRef } from "react";
 import * as THREE from "three";
 
 import fragmentShader from "./cloud.frag";
-import vertexShader from "./cloud.vert";
+import vertexShader from "../base.vert";
 import { TERRAN_CLOUD_COLORS } from "../../colors";
 import { DEFAULT_TIME_VALUE_UPDATE } from "../../constants";
 

@@ -5,7 +5,7 @@ import { useRef } from "react";
 import * as THREE from "three";
 
 import fragmentShader from "./land.frag";
-import vertexShader from "./land.vert";
+import vertexShader from "../base.vert";
 import { BASE_TERRAN_LAND_COLORS } from "../../colors";
 import { DEFAULT_TIME_VALUE_UPDATE } from "../../constants";
 

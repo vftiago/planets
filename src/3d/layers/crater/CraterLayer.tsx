@@ -5,7 +5,7 @@ import { useRef } from "react";
 import * as THREE from "three";
 
 import fragmentShader from "./crater.frag";
-import vertexShader from "./crater.vert";
+import vertexShader from "../base.vert";
 import { BASE_CRATER_COLORS } from "../../colors";
 import { DEFAULT_TIME_VALUE_UPDATE } from "../../constants";
 

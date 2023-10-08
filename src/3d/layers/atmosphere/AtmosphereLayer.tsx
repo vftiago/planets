@@ -5,7 +5,7 @@ import { useRef } from "react";
 import * as THREE from "three";
 
 import fragmentShader from "./atmosphere.frag";
-import vertexShader from "./atmosphere.vert";
+import vertexShader from "../base.vert";
 import { BASE_ATMOSPHERE_COLORS } from "../../colors";
 import { DEFAULT_TIME_VALUE_UPDATE } from "../../constants";
 

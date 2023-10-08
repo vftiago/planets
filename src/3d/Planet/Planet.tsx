@@ -15,8 +15,6 @@ type PlanetObjectProps = {
 };
 
 const Planet = ({ seed, type, rotation }: PlanetObjectProps) => {
-  return <Lava seed={seed} rotation={rotation} />;
-
   switch (type) {
     case PlanetType.Terran:
       return <Terran seed={seed} rotation={rotation} />;

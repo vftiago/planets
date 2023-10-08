@@ -5,7 +5,7 @@ import { useRef } from "react";
 import * as THREE from "three";
 
 import fragmentShader from "./ring-colors.frag";
-import vertexShader from "./ring-colors.vert";
+import vertexShader from "../base.vert";
 import { DEFAULT_TIME_VALUE_UPDATE } from "../../constants";
 
 type RingColorsLayerProps = {

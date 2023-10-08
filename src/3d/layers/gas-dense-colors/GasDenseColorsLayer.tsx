@@ -5,7 +5,7 @@ import { useRef } from "react";
 import * as THREE from "three";
 
 import fragmentShader from "./gas-dense-colors.frag";
-import vertexShader from "./gas-dense-colors.vert";
+import vertexShader from "../base.vert";
 import { DEFAULT_TIME_VALUE_UPDATE } from "../../constants";
 
 type GasDenseColorsLayerProps = {

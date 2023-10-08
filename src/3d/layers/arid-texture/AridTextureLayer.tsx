@@ -5,7 +5,7 @@ import { useRef } from "react";
 import * as THREE from "three";
 
 import fragmentShader from "./arid-texture.frag";
-import vertexShader from "./arid-texture.vert";
+import vertexShader from "../base.vert";
 import { DEFAULT_TIME_VALUE_UPDATE } from "../../constants";
 import palette from "./dry_terran.png";
 import { useTexture } from "@react-three/drei";

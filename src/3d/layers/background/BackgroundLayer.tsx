@@ -5,7 +5,7 @@ import { useRef } from "react";
 import * as THREE from "three";
 
 import fragmentShader from "./background.frag";
-import vertexShader from "./background.vert";
+import vertexShader from "../base.vert";
 import { DEFAULT_TIME_VALUE_UPDATE } from "../../constants";
 import { useTexture } from "@react-three/drei";
 import color from "./palette.png";

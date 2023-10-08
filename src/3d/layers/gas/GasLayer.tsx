@@ -5,7 +5,7 @@ import { useRef } from "react";
 import * as THREE from "three";
 
 import fragmentShader from "./gas.frag";
-import vertexShader from "./gas.vert";
+import vertexShader from "../base.vert";
 import { GAS_CLOUD_COLORS } from "../../colors";
 import { DEFAULT_TIME_VALUE_UPDATE } from "../../constants";
 
