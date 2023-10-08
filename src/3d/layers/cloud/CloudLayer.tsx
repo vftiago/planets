@@ -6,7 +6,7 @@ import * as THREE from "three";
 
 import fragmentShader from "./cloud.frag";
 import vertexShader from "./cloud.vert";
-import { BASE_CLOUD_COLORS } from "../../colors";
+import { TERRAN_CLOUD_COLORS } from "../../colors";
 import { DEFAULT_TIME_VALUE_UPDATE } from "../../constants";
 
 type CloudLayerProps = {
@@ -20,6 +20,7 @@ type CloudLayerProps = {
   land?: number;
   cloudCover?: number;
   stretch?: number;
+  lightBorder?: [number, number];
 };
 
 const CloudLayer = ({
@@ -31,10 +32,11 @@ const CloudLayer = ({
   rotation,
   cloudCover = 0.546,
   stretch = 2.5,
+  lightBorder = [0.4, 0.5],
 }: CloudLayerProps) => {
   const materialRef = useRef<THREE.ShaderMaterial>(null);
 
-  const colorPalette = useMemo(() => (colors ? colors : BASE_CLOUD_COLORS), [colors]);
+  const colorPalette = useMemo(() => (colors ? colors : TERRAN_CLOUD_COLORS), [colors]);
 
   useLayoutEffect(() => {
     if (!materialRef.current) {
@@ -51,13 +53,15 @@ const CloudLayer = ({
       shadow_base_color: { value: new THREE.Vector4(...colorPalette[2], 1) },
       shadow_outline_color: { value: new THREE.Vector4(...colorPalette[3], 1) },
       cloud_cover: { value: cloudCover },
+      light_border_1: { value: lightBorder[0] },
+      light_border_2: { value: lightBorder[1] },
       rotation: { value: rotation },
       stretch: { value: stretch },
       time: { value: 0.0 },
     };
 
     materialRef.current.uniforms = uniforms;
-  }, [colorPalette, cloudCover, lightPos, seed, rotation, rotationSpeed, stretch]);
+  }, [colorPalette, cloudCover, lightPos, lightBorder, seed, rotation, rotationSpeed, stretch]);
 
   useFrame(() => {
     if (!materialRef.current) {

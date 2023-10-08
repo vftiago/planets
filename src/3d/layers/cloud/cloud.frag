@@ -6,8 +6,8 @@ uniform vec2 light_origin;
 uniform float time_speed;
 uniform float stretch;
 float cloud_curve = 1.3;
-float light_border_1 = 0.4;
-float light_border_2 = 0.6;
+uniform float light_border_1;
+uniform float light_border_2;
 
 uniform vec4 base_color;
 uniform vec4 outline_color;

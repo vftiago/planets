@@ -55,7 +55,7 @@ export const BASE_LAVA_RIVER_COLORS = [
   new THREE.Color(0.678431, 0.184314, 0.270588),
 ];
 
-export const BASE_CLOUD_COLORS = [
+export const TERRAN_CLOUD_COLORS = [
   new THREE.Color(0.960784, 1, 0.909804),
   new THREE.Color(0.87451, 0.878431, 0.909804),
   new THREE.Color(0.407843, 0.435294, 0.6),
@@ -68,13 +68,6 @@ export const BASE_LAND_MASS_COLORS = [
   new THREE.Color(0.184314, 0.341176, 0.32549),
   new THREE.Color(0.156863, 0.207843, 0.25098),
 ];
-
-// export const BASE_CLOUD_COLORS = [
-//   new THREE.Color(0.882353, 0.94902, 1),
-//   new THREE.Color(0.752941, 0.890196, 1),
-//   new THREE.Color(0.368627, 0.439216, 0.647059),
-//   new THREE.Color(0.25098, 0.286275, 0.45098),
-// ];
 
 export const BASE_ATMOSPHERE_COLORS = [
   new THREE.Color(173 / 255, 216 / 255, 230 / 255),

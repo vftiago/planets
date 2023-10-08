@@ -4,8 +4,8 @@ uniform float pixels;
 uniform float rotation;
 uniform vec2 light_origin;
 uniform float time_speed;
-float light_border_1 = 0.4;
-float light_border_2 = 0.6;
+float light_border_1 = 0.48;
+float light_border_2 = 0.632;
 uniform float lake_cutoff;
 
 uniform vec4 color1;
@@ -13,7 +13,7 @@ uniform vec4 color2;
 uniform vec4 color3;
 
 float size = 10.0;
-int OCTAVES = 4;
+int OCTAVES = 3;
 uniform float seed;
 uniform float time;
 

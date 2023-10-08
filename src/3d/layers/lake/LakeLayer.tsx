@@ -23,7 +23,7 @@ type LakeLayerProps = {
 
 const LakeLayer = ({
   meshProps,
-  lakes = 0.6,
+  lakes = 0.55,
   lightPos = new THREE.Vector2(0.39, 0.7),
   rotationSpeed = 0.1,
   rivers = 0.6,
