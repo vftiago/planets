@@ -5,7 +5,12 @@ import AtmosphereLayer from "../layers/atmosphere/AtmosphereLayer";
 import { PerspectiveCamera } from "@react-three/drei";
 import IslandLayer from "../layers/island/IslandLayer";
 import BaseLayer from "../layers/base/BaseLayer";
-import { BASE_OCEAN_COLORS } from "../colors";
+
+const BASE_OCEAN_COLORS = [
+  new THREE.Color(0.572549, 0.909804, 0.752941),
+  new THREE.Color(0.309804, 0.643137, 0.721569),
+  new THREE.Color(0.172549, 0.207843, 0.301961),
+];
 
 type PlanetObjectProps = {
   seed: number;

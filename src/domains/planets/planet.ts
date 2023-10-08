@@ -13,6 +13,7 @@ export enum PlanetType {
   Arid = "Arid",
   Lava = "Lava",
   Ice = "Ice",
+  Ocean = "Ocean",
 }
 
 export type GameEntity = {

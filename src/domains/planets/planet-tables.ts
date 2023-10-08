@@ -32,6 +32,10 @@ const planetTypes = [
     item: PlanetType.Terran,
     weight: 5,
   },
+  {
+    item: PlanetType.Ocean,
+    weight: 5,
+  },
 ];
 
 export const planetTypeTable = weighted(planetTypes);

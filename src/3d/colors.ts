@@ -6,14 +6,14 @@ export const BASE_COLORS = [
   new THREE.Color(53 / 255, 57 / 255, 85 / 255),
 ];
 
-export const GAS_BASE_COLORS = [
+export const GAS_CLOUD_COLORS = [
   new THREE.Color(0.941176, 0.709804, 0.254902),
   new THREE.Color(0.811765, 0.458824, 0.168627),
   new THREE.Color(0.670588, 0.317647, 0.188235),
   new THREE.Color(0.490196, 0.219608, 0.2),
 ];
 
-export const GAS_COLORS = [
+export const GAS_BASE_COLORS = [
   new THREE.Color(0.231373, 0.12549, 0.152941),
   new THREE.Color(0.231373, 0.12549, 0.152941),
   new THREE.Color(0.129412, 0.0941176, 0.105882),

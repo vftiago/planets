@@ -6,7 +6,7 @@ import * as THREE from "three";
 
 import fragmentShader from "./gas.frag";
 import vertexShader from "./gas.vert";
-import { GAS_BASE_COLORS } from "../../colors";
+import { GAS_CLOUD_COLORS } from "../../colors";
 import { DEFAULT_TIME_VALUE_UPDATE } from "../../constants";
 
 type GasLayerProps = {
@@ -20,23 +20,25 @@ type GasLayerProps = {
   land?: number;
   cloudCover?: number;
   cloudCurve?: number;
+  lightBorder?: number[];
   stretch?: number;
 };
 
 const GasLayer = ({
   meshProps,
   cloudCover = 0.0,
-  cloudCurve = 0.0,
+  cloudCurve = 1.3,
   seed,
   colors,
   rotation = 80.0,
   stretch = 1.0,
   rotationSpeed = 0.1,
+  lightBorder = [0.439, 0.746],
   lightPos = new THREE.Vector2(0.39, 0.7),
 }: GasLayerProps) => {
   const materialRef = useRef<THREE.ShaderMaterial>(null);
 
-  const colorPalette = useMemo(() => (colors ? colors : GAS_BASE_COLORS), [colors]);
+  const colorPalette = useMemo(() => (colors ? colors : GAS_CLOUD_COLORS), [colors]);
 
   useLayoutEffect(() => {
     if (!materialRef.current) {
@@ -54,12 +56,14 @@ const GasLayer = ({
       time_speed: { value: rotationSpeed },
       rotation: { value: rotation },
       light_origin: { value: lightPos },
+      light_border_1: { value: lightBorder[0] },
+      light_border_2: { value: lightBorder[1] },
       seed: { value: seed },
       time: { value: 0.0 },
     };
 
     materialRef.current.uniforms = uniforms;
-  }, [colorPalette, seed, lightPos, rotation, rotationSpeed, stretch, cloudCover, cloudCurve]);
+  }, [colorPalette, seed, lightPos, rotation, lightBorder, rotationSpeed, stretch, cloudCover, cloudCurve]);
 
   useFrame(() => {
     if (!materialRef.current) {

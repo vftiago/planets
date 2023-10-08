@@ -1,7 +1,7 @@
 import { MutableRefObject, useRef, useState } from "react";
 import invariant from "tiny-invariant";
 import { Planet } from "./domains/planets/planet";
-import { useGeneratePlanet } from "./generators/planetGenerator";
+import { useGeneratePlanet } from "./generators/useGeneratePlanet";
 import { PlanetList } from "./Planets/PlanetList";
 import { Box, Heading, Stack } from "@chakra-ui/react";
 import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@chakra-ui/react";

@@ -5,8 +5,8 @@ uniform vec2 light_origin;
 uniform float time_speed;
 uniform float stretch;
 uniform float cloud_curve;
-float light_border_1 = 0.4;
-float light_border_2 = 0.6;
+uniform float light_border_1;
+uniform float light_border_2;
 uniform float rotation;
 
 uniform vec4 base_color;
@@ -115,7 +115,6 @@ void main() {
     }
     if (d_light + c*0.2 > light_border_1) {
         col = shadow_base_color;
-
     }
     if (d_light + c*0.2 > light_border_2) {
         col = shadow_outline_color;
