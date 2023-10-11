@@ -4,8 +4,8 @@ uniform float pixels;
 uniform float rotation;
 uniform vec2 light_origin;
 uniform float time_speed;
-float light_border_1 = 0.48;
-float light_border_2 = 0.632;
+uniform float light_border_1;
+uniform float light_border_2;
 uniform float lake_cutoff;
 
 uniform vec4 color1;
@@ -19,7 +19,7 @@ uniform float time;
 
 float rand(vec2 coord) {
     coord = mod(coord, vec2(2.0,1.0)*floor(size+0.5));
-    return fract(sin(dot(coord.xy ,vec2(12.9898,78.233))) * 15.5453 * seed);
+    return fract(sin(dot(coord.xy ,vec2(12.9898,78.233))) * 43758.5453 * seed);
 }
 
 float noise(vec2 coord){
@@ -48,16 +48,6 @@ float fbm(vec2 coord){
     return value;
 }
 
-bool dither(vec2 uv1, vec2 uv2) {
-    return mod(uv1.x+uv2.y,2.0/pixels) <= 1.0 / pixels;
-}
-
-vec2 rotate(vec2 coord, float angle){
-    coord -= 0.5;
-    coord *= mat2(vec2(cos(angle),-sin(angle)),vec2(sin(angle),cos(angle)));
-    return coord + 0.5;
-}
-
 vec2 spherify(vec2 uv) {
     vec2 centered= uv *2.0-1.0;
     float z = sqrt(1.0 - dot(centered.xy, centered.xy));
@@ -65,6 +55,11 @@ vec2 spherify(vec2 uv) {
     return sphere * 0.5+0.5;
 }
 
+vec2 rotate(vec2 coord, float angle){
+    coord -= 0.5;
+    coord *= mat2(vec2(cos(angle),-sin(angle)),vec2(sin(angle),cos(angle)));
+    return coord + 0.5;
+}
 
 void main() {
     // pixelize uv
@@ -80,6 +75,10 @@ void main() {
     
     // some scrolling noise for landmasses
     float lake = fbm(uv*size+vec2(time*time_speed,0.0));
+
+    // increase contrast on d_light
+    d_light = pow(d_light, 2.0)*0.4;
+    d_light -= d_light * lake;
 
     vec4 col = color1;
     if (d_light > light_border_1) {

@@ -19,6 +19,7 @@ type LakeLayerProps = {
   rotation?: number;
   seed: number;
   pixels?: number;
+  lightBorder?: [number, number];
 };
 
 const LakeLayer = ({
@@ -29,6 +30,7 @@ const LakeLayer = ({
   rivers = 0.6,
   colors,
   rotation,
+  lightBorder = [0.024, 0.047],
   seed,
   pixels = 100.0,
 }: LakeLayerProps) => {
@@ -52,11 +54,13 @@ const LakeLayer = ({
       color1: { value: new THREE.Vector4(...colorPalette[0], 1) },
       color2: { value: new THREE.Vector4(...colorPalette[1], 1) },
       color3: { value: new THREE.Vector4(...colorPalette[2], 1) },
+      light_border_1: { value: lightBorder[0] },
+      light_border_2: { value: lightBorder[1] },
       time: { value: 0.0 },
     };
 
     materialRef.current.uniforms = uniforms;
-  }, [colorPalette, lightPos, seed, rotation, rivers, rotationSpeed, lakes, pixels]);
+  }, [colorPalette, lightPos, seed, rotation, rivers, lightBorder, rotationSpeed, lakes, pixels]);
 
   useFrame(() => {
     if (!materialRef.current) {
