@@ -4,6 +4,7 @@ import { PerspectiveCamera } from "@react-three/drei";
 import BaseLayer from "../layers/base/BaseLayer";
 import CloudLayer from "../layers/cloud/CloudLayer";
 import LakeLayer from "../layers/lake/LakeLayer";
+import BackgroundLayer from "../layers/background/BackgroundLayer";
 
 type PlanetObjectProps = {
   seed: number;
@@ -33,6 +34,7 @@ const ICE_CLOUD_COLORS = [
 const Ice = (planetObjectProps: PlanetObjectProps) => {
   return (
     <group>
+      <BackgroundLayer />
       <BaseLayer {...planetObjectProps} colors={BASE_ICE_COLORS} />
       <LakeLayer {...planetObjectProps} colors={BASE_LAKE_COLORS} />
       <CloudLayer {...planetObjectProps} colors={ICE_CLOUD_COLORS} lightBorder={[0.566, 0.781]} />

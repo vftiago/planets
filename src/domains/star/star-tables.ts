@@ -1,11 +1,11 @@
-import { addWeight } from "@lrkit/weighted";
-import { StarSize, StarTemperature } from "./star";
+// import { addWeight } from "@lrkit/weighted";
+// import { StarSize, StarTemperature } from "./star";
 
-const starSizes = [StarSize.XS, StarSize.S, StarSize.M, StarSize.L, StarSize.XL];
-const starTemperatures = [StarTemperature.RED, StarTemperature.ORANGE, StarTemperature.YELLOW, StarTemperature.WHITE, StarTemperature.BLUE];
+// const starSizes = [StarSize.XS, StarSize.S, StarSize.M, StarSize.L, StarSize.XL];
+// const starTemperatures = [StarTemperature.RED, StarTemperature.ORANGE, StarTemperature.YELLOW, StarTemperature.WHITE, StarTemperature.BLUE];
 
-const weightedStarSizes = addWeight(starSizes, 1);
-const weightedStarTemperatures = addWeight(starTemperatures, 1);
+// const weightedStarSizes = addWeight(starSizes, 1);
+// const weightedStarTemperatures = addWeight(starTemperatures, 1);
 
 // a galaxy is divided into four quadrants
 // each quadrant is divided into 20 (or 16?) sectors

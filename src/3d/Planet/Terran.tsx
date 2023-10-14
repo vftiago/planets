@@ -4,6 +4,7 @@ import CloudLayer from "../layers/cloud/CloudLayer";
 import AtmosphereLayer from "../layers/atmosphere/AtmosphereLayer";
 import { PerspectiveCamera } from "@react-three/drei";
 import TerranLayer from "../layers/terran/TerranLayer";
+import BackgroundLayer from "../layers/background/BackgroundLayer";
 
 type PlanetObjectProps = {
   seed: number;
@@ -14,6 +15,7 @@ type PlanetObjectProps = {
 const Terran = (planetObjectProps: PlanetObjectProps) => {
   return (
     <group>
+      <BackgroundLayer />
       <TerranLayer {...planetObjectProps} />
       <CloudLayer {...planetObjectProps} />
       <AtmosphereLayer {...planetObjectProps} />

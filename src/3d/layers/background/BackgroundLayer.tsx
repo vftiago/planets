@@ -7,35 +7,25 @@ import * as THREE from "three";
 import fragmentShader from "./background.frag";
 import vertexShader from "../base.vert";
 import { DEFAULT_TIME_VALUE_UPDATE } from "../../constants";
-import { useTexture } from "@react-three/drei";
-import color from "./palette.png";
 
 type BackgroundLayerProps = {
   meshProps?: JSX.IntrinsicElements["mesh"];
-  seed: number;
 };
 
-// looks bad. try to find a better nebula-style fragment shader online
-const BackgroundLayer = ({ meshProps, seed }: BackgroundLayerProps) => {
+const BackgroundLayer = ({ meshProps }: BackgroundLayerProps) => {
   const materialRef = useRef<THREE.ShaderMaterial>(null);
-
-  const { colorSchemeTexture } = useTexture({ colorSchemeTexture: color });
 
   useLayoutEffect(() => {
     if (!materialRef.current) {
       return;
     }
 
-    colorSchemeTexture.magFilter = THREE.NearestFilter;
-    colorSchemeTexture.minFilter = THREE.NearestFilter;
-
     const uniforms = {
-      colorscheme: { value: colorSchemeTexture },
-      seed: { value: seed },
+      time: { value: Math.floor(Math.random() * 120) },
     };
 
     materialRef.current.uniforms = uniforms;
-  }, [colorSchemeTexture, seed]);
+  }, []);
 
   useFrame(() => {
     if (!materialRef.current) {

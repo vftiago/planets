@@ -32,7 +32,9 @@ export const PlanetCard = ({
       </CardHeader>
       <Divider />
       <CardBody p="0">
-        <Box p="2" background="blackAlpha.600" h="200" ref={planetRef}></Box>
+        <Box p="2" background="black" h="250" ref={planetRef}>
+          {/* Planet gets drawn here */}
+        </Box>
         <Divider />
         <Box p="o" h="130">
           {identified ? (

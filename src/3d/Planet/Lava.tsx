@@ -5,6 +5,7 @@ import { PerspectiveCamera } from "@react-three/drei";
 import CraterLayer from "../layers/crater/CraterLayer";
 import LavaRiverLayer from "../layers/lava-river/LavaRiverLayer";
 import { BASE_LAVA_COLORS, BASE_LAVA_CRATER_COLORS, BASE_LAVA_RIVER_COLORS } from "../colors";
+import BackgroundLayer from "../layers/background/BackgroundLayer";
 
 type PlanetObjectProps = {
   seed: number;
@@ -15,6 +16,7 @@ type PlanetObjectProps = {
 const Lava = (planetObjectProps: PlanetObjectProps) => {
   return (
     <group>
+      <BackgroundLayer />
       <BaseLayer {...planetObjectProps} colors={BASE_LAVA_COLORS} />
       <CraterLayer {...planetObjectProps} colors={BASE_LAVA_CRATER_COLORS} />
       <LavaRiverLayer {...planetObjectProps} colors={BASE_LAVA_RIVER_COLORS} />

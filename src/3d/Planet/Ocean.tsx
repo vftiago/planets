@@ -5,6 +5,7 @@ import AtmosphereLayer from "../layers/atmosphere/AtmosphereLayer";
 import { PerspectiveCamera } from "@react-three/drei";
 import IslandLayer from "../layers/island/IslandLayer";
 import BaseLayer from "../layers/base/BaseLayer";
+import BackgroundLayer from "../layers/background/BackgroundLayer";
 
 const BASE_OCEAN_COLORS = [
   new THREE.Color(0.572549, 0.909804, 0.752941),
@@ -21,6 +22,7 @@ type PlanetObjectProps = {
 const Ocean = (planetObjectProps: PlanetObjectProps) => {
   return (
     <group>
+      <BackgroundLayer />
       <BaseLayer {...planetObjectProps} colors={BASE_OCEAN_COLORS} />
       <IslandLayer {...planetObjectProps} />
       <CloudLayer {...planetObjectProps} />
