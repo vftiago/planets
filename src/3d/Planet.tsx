@@ -1,12 +1,13 @@
-import Terran from "./Terran";
-import NoAtmosphere from "./NoAtmosphere";
-import { PlanetType } from "../../domains/planets/planet";
-import Lava from "./Lava";
-import Ice from "./Ice";
-import AridColors from "./AridColors";
-import Gas from "./Gas";
-import GasRing from "./GasRing";
-import Ocean from "./Ocean";
+import Terran from "./Planet/Terran";
+import NoAtmosphere from "./Planet/NoAtmosphere";
+import { PlanetType } from "../domains/planets/planet";
+import Lava from "./Planet/Lava";
+import Ice from "./Planet/Ice";
+import AridColors from "./Planet/AridColors";
+import Gas from "./Planet/Gas";
+import GasRing from "./Planet/GasRing";
+import Ocean from "./Planet/Ocean";
+import Star from "./Star";
 
 type PlanetObjectProps = {
   seed: number;
@@ -15,6 +16,7 @@ type PlanetObjectProps = {
 };
 
 const Planet = ({ seed, type, rotation }: PlanetObjectProps) => {
+  return <Star seed={seed} rotation={rotation} />;
   switch (type) {
     case PlanetType.Terran:
       return <Terran seed={seed} rotation={rotation} />;

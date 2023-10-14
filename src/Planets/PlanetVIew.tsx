@@ -1,6 +1,6 @@
 import { View } from "@react-three/drei";
 import { MutableRefObject, useRef } from "react";
-import Planet from "../3d/Planet/Planet";
+import Planet from "../3d/Planet";
 import { PlanetType } from "../domains/planets/planet";
 
 const PlanetView = ({
