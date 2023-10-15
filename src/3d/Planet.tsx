@@ -8,6 +8,7 @@ import Gas from "./Planet/Gas";
 import GasRing from "./Planet/GasRing";
 import Ocean from "./Planet/Ocean";
 import Star from "./Star";
+import Asteroid from "./Asteroid";
 
 type PlanetObjectProps = {
   seed: number;
@@ -16,7 +17,6 @@ type PlanetObjectProps = {
 };
 
 const Planet = ({ seed, type, rotation }: PlanetObjectProps) => {
-  return <Star seed={seed} rotation={rotation} />;
   switch (type) {
     case PlanetType.Terran:
       return <Terran seed={seed} rotation={rotation} />;
