@@ -8,11 +8,10 @@
 
   uniform float circle_amount;
   uniform float circle_size;
-
+  uniform float scale_rel_to_star;
   uniform float seed;
   float size = 4.93;
   int OCTAVES = 4;
-  float TILES = 1.0;
 
 
   float rand(vec2 co){
@@ -58,18 +57,6 @@
       return mix(a, b, cubic.x) + (c - a) * cubic.y * (1.0 - cubic.x) + (d - b) * cubic.x * cubic.y;
   }
   
-  float fbm(vec2 coord){
-      float value = 0.0;
-      float scl = 0.5;
-  
-      for(int i = 0; i < OCTAVES ; i++){
-          value += noise(coord) * scl;
-          coord *= 2.0;
-          scl *= 0.5;
-      }
-      return value;
-  }
-  
   vec2 spherify(vec2 uv) {
       vec2 centered= uv *2.0-1.0;
       float z = sqrt(1.0 - dot(centered.xy, centered.xy));
@@ -95,7 +82,7 @@
           c += circle(circleUV*size -time * time_speed - (1.0/d) * 0.1 + r);
       }
       
-      c *= 0.37 - d;
+      c *= 0.37 * scale_rel_to_star - d;
       c = step(0.07, c - d);
       
       gl_FragColor = vec4(color.rgb, c * color.a);

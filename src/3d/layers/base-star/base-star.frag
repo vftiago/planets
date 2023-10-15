@@ -8,7 +8,7 @@ bool should_dither = true;
 
 uniform float seed;
 float size = 4.463;
-int OCTAVES = 5;
+int OCTAVES = 4;
 float TILES = 2.0;
 
 uniform vec3 colorscheme[4];

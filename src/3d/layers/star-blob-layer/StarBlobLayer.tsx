@@ -32,8 +32,9 @@ const StarBlobLayer = ({ meshProps, seed, color, rotation = 0.1, rotationSpeed =
       time_speed: { value: rotationSpeed },
       rotation: { value: rotation },
       seed: { value: seed },
-      circle_amount: { value: 1.0 },
+      circle_amount: { value: 2.0 },
       circle_size: { value: 1.0 },
+      scale_rel_to_star: { value: 1.7 },
       time: { value: 0.0 },
     };
 
@@ -52,7 +53,7 @@ const StarBlobLayer = ({ meshProps, seed, color, rotation = 0.1, rotationSpeed =
 
   return (
     <mesh {...meshProps}>
-      <planeGeometry args={[1, 1]} />
+      <planeGeometry args={[1.6, 1.6]} />
       <shaderMaterial
         ref={materialRef}
         vertexShader={vertexShader}
