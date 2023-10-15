@@ -8,7 +8,6 @@
 
   uniform float circle_amount;
   uniform float circle_size;
-  uniform float scale_rel_to_star;
   uniform float seed;
   float size = 4.93;
   int OCTAVES = 4;
@@ -82,7 +81,7 @@
           c += circle(circleUV*size -time * time_speed - (1.0/d) * 0.1 + r);
       }
       
-      c *= 0.37 * scale_rel_to_star - d;
+      c *= 0.37 - d;
       c = step(0.07, c - d);
       
       gl_FragColor = vec4(color.rgb, c * color.a);

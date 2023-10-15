@@ -1,3 +1,26 @@
-I made up `scale_rel_to_star` (based on the gas giant ring's `scale_rel_to_planet`) because I couldn't figure out how to make the blob layer larger than the star itself without modifying the existing shader. I couldn't understand how this achieved in the original Godot project so far.
+TODO: implement the following solution across all materials to allow for scaling when necessary:
 
-Not really a big deal because I'm not a big fan of this blob layer anyway and will probably end up not using it at all. At the very least it needs a lot of tweaking in order to look good.
+- To achieve a similar effect as `set_shader_param`, you can use shader uniforms in Three.js. If you're using a custom shader material, define a uniform for the scaling factor and set its value in your shader.
+
+Example (in the shader):
+
+```glsl
+uniform float scale; // Add this uniform to your shader
+
+void main() {
+    // Apply the scale to your vertex or fragment shader calculations
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position * vec3(scale, scale, 1), 1.0);
+}
+```
+
+Example (in Three.js JavaScript):
+
+```javascript
+// Assuming you've created a ShaderMaterial
+var material = new THREE.ShaderMaterial({
+  uniforms: {
+    scale: { value: amount * relativeScale }, // Set the uniform value
+  },
+  // ... other shader properties
+});
+```
