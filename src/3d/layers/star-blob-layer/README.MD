@@ -1,4 +1,4 @@
-TODO: implement the following solution across all materials to allow for scaling when necessary:
+TODO: implement the following solution across all materials to allow proper scaling whenever necessary:
 
 - To achieve a similar effect as `set_shader_param`, you can use shader uniforms in Three.js. If you're using a custom shader material, define a uniform for the scaling factor and set its value in your shader.
 

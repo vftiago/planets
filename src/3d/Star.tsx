@@ -3,6 +3,7 @@ import { PerspectiveCamera } from "@react-three/drei";
 import BaseStarLayer from "./layers/base-star/BaseStarLayer";
 import BackgroundLayer from "./layers/background/BackgroundLayer";
 import StarBlobLayer from "./layers/star-blob-layer/StarBlobLayer";
+import StarFlareLayer from "./layers/star-flare-layer/StarFlareLayer";
 
 type StarObjectProps = {
   seed: number;
@@ -19,12 +20,15 @@ const BASE_STAR_COLORS = [
 
 const BASE_STAR_BLOB_COLOR = new THREE.Color(1, 1, 0.894118);
 
+const BASE_STAR_FLARE_COLORS = [new THREE.Color(0.466667, 0.839216, 0.756863), new THREE.Color(1, 1, 0.894118)];
+
 const Star = (planetObjectProps: StarObjectProps) => {
   return (
     <group>
       <BackgroundLayer />
       <StarBlobLayer {...planetObjectProps} color={BASE_STAR_BLOB_COLOR} />
       <BaseStarLayer {...planetObjectProps} colors={BASE_STAR_COLORS} />
+      <StarFlareLayer {...planetObjectProps} colors={BASE_STAR_FLARE_COLORS} />
       <PerspectiveCamera makeDefault fov={90} position={[0, 0, 0.6]} />
     </group>
   );
