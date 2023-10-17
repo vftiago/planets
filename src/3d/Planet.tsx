@@ -9,6 +9,7 @@ import GasRing from "./Planet/GasRing";
 import Ocean from "./Planet/Ocean";
 import Star from "./Star";
 import Asteroid from "./Asteroid";
+import BlackHole from "./BlackHole";
 
 type PlanetObjectProps = {
   seed: number;
