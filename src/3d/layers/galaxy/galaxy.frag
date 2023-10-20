@@ -106,21 +106,35 @@ void main() {
 
     f2 = floor(f2 * (n_colors + 1.0)) / n_colors;
 
-    vec3 finalColor;
+    // calculate the index (integer part of f2) and its fractional part.
+    int index = int(f2 * n_colors);
 
-    if (f2 < 0.2) {
-        finalColor = colorScheme[0];
-    } else if (f2 < 0.4) {
-        finalColor = colorScheme[1];
-    } else if (f2 < 0.6) {
-        finalColor = colorScheme[2];
-    } else if (f2 < 0.8) {
-        finalColor = colorScheme[3];
-    } else if (f2 < 1.0) {
-        finalColor = colorScheme[4];
-    } else {
-        finalColor = colorScheme[5];
+    // ensure that the index doesn't exceed the maximum index
+    if (index > 5) {
+        index = 5;
     }
+    // calculate the fractional part of f2
+    float fraction = fract(f2 * n_colors);
+
+    // use the index to access two adjacent colors in the colorscheme.
+    vec3 color1 = colorScheme[index];
+    vec3 color2 = colorScheme[index + 1];
+
+    vec3 finalColor = mix(color1, color2, fraction);
+
+    // if (f2 < 0.2) {
+    //     finalColor = colorScheme[0];
+    // } else if (f2 < 0.4) {
+    //     finalColor = colorScheme[1];
+    // } else if (f2 < 0.6) {
+    //     finalColor = colorScheme[2];
+    // } else if (f2 < 0.8) {
+    //     finalColor = colorScheme[3];
+    // } else if (f2 < 1.0) {
+    //     finalColor = colorScheme[4];
+    // } else {
+    //     finalColor = colorScheme[5];
+    // }
 
     gl_FragColor = vec4(finalColor.rgb, a);
 }

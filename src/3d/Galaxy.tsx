@@ -36,12 +36,30 @@ const ORANGE_GALAXY_COLORS = [
   new THREE.Color("#56104C"),
 ];
 
+const PURPLE_GALAXY_COLORS = [
+  new THREE.Color("#FFFBA9"),
+  new THREE.Color("#E3B5E1"),
+  new THREE.Color("#9069E9"),
+  new THREE.Color("#463898"),
+  new THREE.Color("#222E35"),
+  new THREE.Color("#1F310E"),
+];
+
+const PINK_GALAXY_COLORS = [
+  new THREE.Color("#D1F9A6"),
+  new THREE.Color("#F8CAC8"),
+  new THREE.Color("#E390DE"),
+  new THREE.Color("#8E58C4"),
+  new THREE.Color("#352B7D"),
+  new THREE.Color("#0D0D2D"),
+];
+
 const Galaxy = (planetObjectProps: GalaxyObjectProps) => {
   return (
     <group>
       <BackgroundLayer />
       <GalaxyLayer {...planetObjectProps} colors={BASE_GALAXY_COLORS} />
-      <PerspectiveCamera makeDefault fov={90} position={[0, 0, 0.4]} />
+      <PerspectiveCamera makeDefault fov={90} position={[0, 0, 0.3]} />
     </group>
   );
 };
