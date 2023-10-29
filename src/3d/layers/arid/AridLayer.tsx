@@ -4,19 +4,29 @@ import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import * as THREE from "three";
 
-import fragmentShader from "./base-star.frag";
+import fragmentShader from "./arid.frag";
 import vertexShader from "../base.vert";
 import { DEFAULT_TIME_VALUE_UPDATE } from "../../constants";
 
-type BaseStarLayerProps = {
+type AridLayerProps = {
   meshProps?: JSX.IntrinsicElements["mesh"];
-  seed: number;
+  lightPos?: THREE.Vector2;
+  rotationSpeed?: number;
   colors?: THREE.Color[];
   rotation?: number;
-  rotationSpeed?: number;
+  seed: number;
+  pixels?: number;
 };
 
-const BaseStarLayer = ({ meshProps, seed, colors, rotation = 0.1, rotationSpeed = 0.1 }: BaseStarLayerProps) => {
+const AridLayer = ({
+  meshProps,
+  colors,
+  lightPos = new THREE.Vector2(0.39, 0.7),
+  rotationSpeed = 0.1,
+  rotation,
+  seed,
+  pixels = 100.0,
+}: AridLayerProps) => {
   const materialRef = useRef<THREE.ShaderMaterial>(null);
 
   useLayoutEffect(() => {
@@ -25,18 +35,17 @@ const BaseStarLayer = ({ meshProps, seed, colors, rotation = 0.1, rotationSpeed 
     }
 
     const uniforms = {
-      pixels: { value: 100.0 },
-      colorscheme: { value: colors },
-      lightIntensity: { value: 0.1 },
-      light_origin: { value: new THREE.Vector2(0.39, 0.7) },
+      pixels: { value: pixels },
+      light_origin: { value: lightPos },
+      seed: { value: seed },
       time_speed: { value: rotationSpeed },
       rotation: { value: rotation },
-      seed: { value: seed },
+      colors: { value: colors },
       time: { value: 0.0 },
     };
 
     materialRef.current.uniforms = uniforms;
-  }, [colors, seed, rotation, rotationSpeed]);
+  }, [colors, lightPos, seed, rotation, rotationSpeed, pixels]);
 
   useFrame(() => {
     if (!materialRef.current) {
@@ -61,4 +70,4 @@ const BaseStarLayer = ({ meshProps, seed, colors, rotation = 0.1, rotationSpeed 
   );
 };
 
-export default BaseStarLayer;
+export default AridLayer;

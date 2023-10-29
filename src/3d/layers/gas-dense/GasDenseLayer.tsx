@@ -8,7 +8,7 @@ import fragmentShader from "./gas-dense-colors.frag";
 import vertexShader from "../base.vert";
 import { DEFAULT_TIME_VALUE_UPDATE } from "../../constants";
 
-type GasDenseColorsLayerProps = {
+type GasDenseLayerProps = {
   meshProps?: JSX.IntrinsicElements["mesh"];
   seed: number;
   pixels?: number;
@@ -34,7 +34,7 @@ const BASE_GAS_DARK_COLORS = [
   new THREE.Color(0.133333, 0.12549, 0.203922),
 ];
 
-const GasDenseColorsLayer = ({
+const GasDenseLayer = ({
   meshProps,
   seed,
   pixels = 100.0,
@@ -43,7 +43,7 @@ const GasDenseColorsLayer = ({
   flatten = 1.3,
   stretch = 3.0,
   rotation,
-}: GasDenseColorsLayerProps) => {
+}: GasDenseLayerProps) => {
   const materialRef = useRef<THREE.ShaderMaterial>(null);
 
   useLayoutEffect(() => {
@@ -90,4 +90,4 @@ const GasDenseColorsLayer = ({
   );
 };
 
-export default GasDenseColorsLayer;
+export default GasDenseLayer;

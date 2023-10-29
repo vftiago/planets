@@ -8,7 +8,7 @@ import fragmentShader from "./ring-colors.frag";
 import vertexShader from "../base.vert";
 import { DEFAULT_TIME_VALUE_UPDATE } from "../../constants";
 
-type RingColorsLayerProps = {
+type RingLayerProps = {
   meshProps?: JSX.IntrinsicElements["mesh"];
   seed: number;
   pixels?: number;
@@ -34,7 +34,7 @@ const BASE_GAS_DARK_COLORS = [
   new THREE.Color(0.133333, 0.12549, 0.203922),
 ];
 
-const RingColorsLayer = ({
+const RingLayer = ({
   meshProps,
   seed,
   colors,
@@ -46,7 +46,7 @@ const RingColorsLayer = ({
   ringPerspective = 6.0,
   scalePlanet = 4.0,
   rotation,
-}: RingColorsLayerProps) => {
+}: RingLayerProps) => {
   const materialRef = useRef<THREE.ShaderMaterial>(null);
   useLayoutEffect(() => {
     if (!materialRef.current) {
@@ -93,4 +93,4 @@ const RingColorsLayer = ({
   );
 };
 
-export default RingColorsLayer;
+export default RingLayer;
