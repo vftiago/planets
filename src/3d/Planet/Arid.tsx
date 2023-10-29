@@ -1,7 +1,7 @@
 import * as THREE from "three";
 
 import { PerspectiveCamera } from "@react-three/drei";
-import AridColorsLayer from "../layers/arid-colors/AridColorsLayer";
+import AridColorsLayer from "../layers/arid/AridLayer";
 import BackgroundLayer from "../layers/background/BackgroundLayer";
 
 type PlanetObjectProps = {
@@ -18,7 +18,7 @@ const BASE_ARID_COLORS = [
   new THREE.Color(0.239216, 0.160784, 0.211765),
 ];
 
-const AridColors = (planetObjectProps: PlanetObjectProps) => {
+const Arid = (planetObjectProps: PlanetObjectProps) => {
   return (
     <group>
       <BackgroundLayer />
@@ -28,4 +28,4 @@ const AridColors = (planetObjectProps: PlanetObjectProps) => {
   );
 };
 
-export default AridColors;
+export default Arid;

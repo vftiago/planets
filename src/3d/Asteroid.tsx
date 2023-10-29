@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { PerspectiveCamera } from "@react-three/drei";
 import BackgroundLayer from "./layers/background/BackgroundLayer";
-import AsteroidLayer from "./layers/asteroid-layer/AsteroidLayer";
+import AsteroidLayer from "./layers/asteroid/AsteroidLayer";
 
 type AsteroidObjectProps = {
   seed: number;

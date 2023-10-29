@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { PerspectiveCamera } from "@react-three/drei";
-import BaseStarLayer from "./layers/base-star/BaseStarLayer";
+import BaseStarLayer from "./layers/star/StarLayer";
 import BackgroundLayer from "./layers/background/BackgroundLayer";
 import StarBlobLayer from "./layers/star-blob-layer/StarBlobLayer";
 import StarFlareLayer from "./layers/star-flare-layer/StarFlareLayer";

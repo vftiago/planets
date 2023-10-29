@@ -3,7 +3,7 @@ import NoAtmosphere from "./Planet/NoAtmosphere";
 import { PlanetType } from "../domains/planets/planet";
 import Lava from "./Planet/Lava";
 import Ice from "./Planet/Ice";
-import AridColors from "./Planet/AridColors";
+import Arid from "./Planet/Arid";
 import Gas from "./Planet/Gas";
 import GasRing from "./Planet/GasRing";
 import Ocean from "./Planet/Ocean";
@@ -25,7 +25,7 @@ const Planet = ({ seed, type, rotation }: PlanetObjectProps) => {
     case PlanetType.Ice:
       return <Ice seed={seed} rotation={rotation} />;
     case PlanetType.Arid:
-      return <AridColors seed={seed} rotation={rotation} />;
+      return <Arid seed={seed} rotation={rotation} />;
     case PlanetType.Gas:
       return <Gas seed={seed} rotation={rotation} />;
     case PlanetType.GasRing:

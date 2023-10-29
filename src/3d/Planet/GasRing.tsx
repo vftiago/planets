@@ -1,8 +1,8 @@
 import * as THREE from "three";
 
 import { PerspectiveCamera } from "@react-three/drei";
-import GasDenseColorsLayer from "../layers/gas-dense-colors/GasDenseColorsLayer";
-import RingColorsLayer from "../layers/ring-colors/RingColorsLayer";
+import GasDenseColorsLayer from "../layers/gas-dense/GasDenseLayer";
+import RingColorsLayer from "../layers/ring/RingLayer";
 import BackgroundLayer from "../layers/background/BackgroundLayer";
 
 type PlanetObjectProps = {
